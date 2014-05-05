@@ -1,2 +1,2 @@
-machine_learning
-================
+Various machine learning and data mining algorithms.
+
