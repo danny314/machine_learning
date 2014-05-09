@@ -3,8 +3,11 @@ gadata = read.table("/home/puneet/mr/driftdataset/batch1.dat",header=F);
 
 #We need to substring all the data points because they are prefixed with the feature number.
 endIndex = 20;
+options(digits=11);
+#A function to convert factor to number
+facToNum <- function(x) { (as.numeric(levels(x))[x]) };
 
-df = transform(gadata, GAS = substr(gadata$V1, 1, 1), CONCENTRATION = substr(gadata$V1,3, endIndex),
+df = transform(gadata, GAS = substr(gadata$V1, 1, 1)), CONCENTRATION = substr(gadata$V1,3, endIndex),
     #sensor 1               
     S1DR = substr(gadata$V2,3, endIndex), S1NDR = substr(gadata$V3,3, endIndex),
     S1I_001 = substr(gadata$V4,3, endIndex), S1I_01 = substr(gadata$V5,3, endIndex), S1I_1 = substr(gadata$V6,3, endIndex),
