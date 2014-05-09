@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.stream.Stream;
@@ -15,7 +16,14 @@ public class DataPreProcessor {
 		 FileWriter fw = null;
 		
 		 try {
-	            String str = "SomeMoreTextIsHere";
+	          	Path writePath = Paths.get("/home/puneet/mr/preprocess/batch1.dat");
+	          	
+			    boolean deleted = Files.deleteIfExists(writePath);
+			    
+			    if (deleted) {
+			    	System.out.println("Previous file deleted");
+			    }
+			    
 	            File newTextFile = new File("/home/puneet/mr/preprocess/batch1.dat");
 
 	            fw = new FileWriter(newTextFile);
@@ -44,8 +52,21 @@ public class DataPreProcessor {
 				
 				writeData(gasLabelConc[0],fw, true);
 				writeData(gasLabelConc[1],fw, true);
-				writeData("\n",fw,false);
 				
+				String sensorReading = "";
+				
+				for (int i=1; i <= 128; i++) {
+					
+					sensorReading = data[i].split(":")[1];
+					
+					boolean isLastColumn = i == 128;
+					
+					writeData(sensorReading,fw, !isLastColumn);
+					
+					if (isLastColumn) {
+						writeData("\n",fw,false);
+					}
+				}
 			}
 			try {
 				fw.close();
