@@ -103,6 +103,71 @@ acetaldehyde1 = subset(acetaldehyde, acetaldehyde$BATCH == 1);
 acetone1 = subset(acetone, acetone$BATCH == 1);
 toluene1 = subset(toluene, toluene$BATCH == 1);
 
+ethanol2 = subset(ethanol, ethanol$BATCH == 2);
+ethylene2 = subset(ethylene, ethylene$BATCH == 2);
+ammonia2 = subset(ammonia, ammonia$BATCH == 2);
+acetaldehyde2 = subset(acetaldehyde, acetaldehyde$BATCH == 2);
+acetone2 = subset(acetone, acetone$BATCH == 2);
+toluene2 = subset(toluene, toluene$BATCH == 2);
+
+ethanol3 = subset(ethanol, ethanol$BATCH == 3);
+ethylene3 = subset(ethylene, ethylene$BATCH == 3);
+ammonia3 = subset(ammonia, ammonia$BATCH == 3);
+acetaldehyde3 = subset(acetaldehyde, acetaldehyde$BATCH == 3);
+acetone3 = subset(acetone, acetone$BATCH == 3);
+# Batch 3 does not have any toluene
+#toluene3 = subset(toluene, toluene$BATCH == 3);
+
+ethanol4 = subset(ethanol, ethanol$BATCH == 4);
+ethylene4 = subset(ethylene, ethylene$BATCH == 4);
+ammonia4 = subset(ammonia, ammonia$BATCH == 4);
+acetaldehyde4 = subset(acetaldehyde, acetaldehyde$BATCH == 4);
+acetone4 = subset(acetone, acetone$BATCH == 4);
+toluene4 = subset(toluene, toluene$BATCH == 4);
+
+ethanol5 = subset(ethanol, ethanol$BATCH == 5);
+ethylene5 = subset(ethylene, ethylene$BATCH == 5);
+ammonia5 = subset(ammonia, ammonia$BATCH == 5);
+acetaldehyde5 = subset(acetaldehyde, acetaldehyde$BATCH == 5);
+acetone5 = subset(acetone, acetone$BATCH == 5);
+toluene5 = subset(toluene, toluene$BATCH == 5);
+
+ethanol6 = subset(ethanol, ethanol$BATCH == 6);
+ethylene6 = subset(ethylene, ethylene$BATCH == 6);
+ammonia6 = subset(ammonia, ammonia$BATCH == 6);
+acetaldehyde6 = subset(acetaldehyde, acetaldehyde$BATCH == 6);
+acetone6 = subset(acetone, acetone$BATCH == 6);
+toluene6 = subset(toluene, toluene$BATCH == 6);
+
+ethanol7 = subset(ethanol, ethanol$BATCH == 7);
+ethylene7 = subset(ethylene, ethylene$BATCH == 7);
+ammonia7 = subset(ammonia, ammonia$BATCH == 7);
+acetaldehyde7 = subset(acetaldehyde, acetaldehyde$BATCH == 7);
+acetone7 = subset(acetone, acetone$BATCH == 7);
+toluene7 = subset(toluene, toluene$BATCH == 7);
+
+ethanol8 = subset(ethanol, ethanol$BATCH == 8);
+ethylene8 = subset(ethylene, ethylene$BATCH == 8);
+ammonia8 = subset(ammonia, ammonia$BATCH == 8);
+acetaldehyde8 = subset(acetaldehyde, acetaldehyde$BATCH == 8);
+acetone8 = subset(acetone, acetone$BATCH == 8;
+toluene8 = subset(toluene, toluene$BATCH == 8);
+                  
+ethanol9 = subset(ethanol, ethanol$BATCH == 9);
+ethylene9 = subset(ethylene, ethylene$BATCH == 9);
+ammonia9 = subset(ammonia, ammonia$BATCH == 9);
+acetaldehyde9 = subset(acetaldehyde, acetaldehyde$BATCH == 9);
+acetone9 = subset(acetone, acetone$BATCH == 9);
+toluene9 = subset(toluene, toluene$BATCH == 9);
+
+ethanol10 = subset(ethanol, ethanol$BATCH == 10);
+ethylene10 = subset(ethylene, ethylene$BATCH == 10);
+ammonia10 = subset(ammonia, ammonia$BATCH == 10);
+acetaldehyde10 = subset(acetaldehyde, acetaldehyde$BATCH == 10);
+acetone10 = subset(acetone, acetone$BATCH == 10);
+toluene10 = subset(toluene, toluene$BATCH == 10);
+                  
+
 #Plot DR vs concentration for all batches
 plot(ethanol$CONC, ethanol$S1DR);
 plot(ethylene$CONC, ethylene$S1DR);
@@ -118,3 +183,75 @@ plot(ammonia1$CONC, ammonia1$S1DR);
 plot(acetaldehyde1$CONC, acetaldehyde1$S1DR);
 plot(acetone1$CONC, acetone1$S1DR);
 plot(toluene1$CONC, toluene1$S1DR);
+
+#Plot DR vs concentration for batch 2
+plot(ethanol2$CONC, ethanol2$S1DR);
+plot(ethylene2$CONC, ethylene2$S1DR);
+plot(ammonia2$CONC, ammonia2$S1DR);
+plot(acetaldehyde2$CONC, acetaldehyde2$S1DR);
+plot(acetone2$CONC, acetone2$S1DR);
+plot(toluene2$CONC, toluene2$S1DR);
+
+#Plot DR vs concentration for batch 3
+plot(ethanol3$CONC, ethanol3$S1DR);
+plot(ethylene3$CONC, ethylene3$S1DR);
+plot(ammonia3$CONC, ammonia3$S1DR);
+plot(acetaldehyde3$CONC, acetaldehyde3$S1DR);
+plot(acetone3$CONC, acetone3$S1DR);
+
+#Plot DR vs concentration for batch 4
+plot(ethanol4$CONC, ethanol4$S1DR);
+plot(ethylene4$CONC, ethylene4$S1DR);
+plot(ammonia4$CONC, ammonia4$S1DR);
+plot(acetaldehyde4$CONC, acetaldehyde4$S1DR);
+plot(acetone4$CONC, acetone4$S1DR);
+plot(toluene4$CONC, toluene4$S1DR);
+
+#Plot DR vs concentration for batch 5
+plot(ethanol5$CONC, ethanol5$S1DR);
+plot(ethylene5$CONC, ethylene5$S1DR);
+plot(ammonia5$CONC, ammonia5$S1DR);
+plot(acetaldehyde5$CONC, acetaldehyde5$S1DR);
+plot(acetone5$CONC, acetone5$S1DR);
+plot(toluene5$CONC, toluene5$S1DR);
+
+#Plot DR vs concentration for batch 6
+plot(ethanol6$CONC, ethanol6$S1DR);
+plot(ethylene6$CONC, ethylene6$S1DR);
+plot(ammonia6$CONC, ammonia6$S1DR);
+plot(acetaldehyde6$CONC, acetaldehyde6$S1DR);
+plot(acetone6$CONC, acetone6$S1DR);
+plot(toluene6$CONC, toluene6$S1DR);
+
+#Plot DR vs concentration for batch 7
+plot(ethanol7$CONC, ethanol7$S1DR);
+plot(ethylene7$CONC, ethylene7$S1DR);
+plot(ammonia7$CONC, ammonia7$S1DR);
+plot(acetaldehyde7$CONC, acetaldehyde7$S1DR);
+plot(acetone7$CONC, acetone7$S1DR);
+plot(toluene7$CONC, toluene7$S1DR);
+
+#Plot DR vs concentration for batch 8
+plot(ethanol8$CONC, ethanol8$S1DR);
+plot(ethylene8$CONC, ethylene8$S1DR);
+plot(ammonia8$CONC, ammonia8$S1DR);
+plot(acetaldehyde8$CONC, acetaldehyde8$S1DR);
+plot(acetone8$CONC, acetone8$S1DR);
+plot(toluene8$CONC, toluene8$S1DR);
+
+#Plot DR vs concentration for batch 9
+plot(ethanol9$CONC, ethanol9$S1DR);
+plot(ethylene9$CONC, ethylene9$S1DR);
+plot(ammonia9$CONC, ammonia9$S1DR);
+plot(acetaldehyde9$CONC, acetaldehyde9$S1DR);
+plot(acetone9$CONC, acetone9$S1DR);
+plot(toluene9$CONC, toluene9$S1DR);
+
+#Plot DR vs concentration for batch 10
+plot(ethanol10$CONC, ethanol10$S1DR);
+plot(ethylene10$CONC, ethylene10$S1DR);
+plot(ammonia10$CONC, ammonia10$S1DR);
+plot(acetaldehyde2$CONC, acetaldehyde10$S1DR);
+plot(acetone10$CONC, acetone10$S1DR);
+plot(toluene10$CONC, toluene10$S1DR);
+
