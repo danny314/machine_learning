@@ -255,3 +255,20 @@ plot(acetaldehyde2$CONC, acetaldehyde10$S1DR);
 plot(acetone10$CONC, acetone10$S1DR);
 plot(toluene10$CONC, toluene10$S1DR);
 
+#Plot sum of DR from all sensors vs concentration for batch 10
+plot(ethanol10$CONC, ethanol10$S1DR + ethanol10$S2DR + ethanol10$S3DR + ethanol10$S4DR + ethanol10$S5DR 
+     + ethanol10$S6DR + ethanol10$S7DR + ethanol10$S8DR + ethanol10$S9DR + ethanol10$S10DR + ethanol10$S11DR
+     + ethanol10$S12DR + ethanol10$S13DR + ethanol10$S14DR + ethanol10$S15DR + ethanol10$S16DR,
+     ylab = "S1DR", xlab='Concentration');
+
+#Plot sum of DR from all sensors vs concentration for all batches
+plot(ethanol$CONC, ethanol$S1DR + ethanol$S2DR + ethanol$S3DR + ethanol$S4DR + ethanol$S5DR 
+     + ethanol$S6DR + ethanol$S7DR + ethanol$S8DR + ethanol$S9DR + ethanol$S10DR + ethanol$S11DR
+     + ethanol$S12DR + ethanol$S13DR + ethanol$S14DR + ethanol$S15DR + ethanol$S16DR,
+     ylab = "S1DR", xlab='Concentration');
+
+#Plot sum of NDR from all sensors vs concentration for all batches
+plot(ethanol$CONC, ethanol$S1NDR + ethanol$S2NDR + ethanol$S3NDR + ethanol$S4NDR + ethanol$S5NDR 
+     + ethanol$S6NDR + ethanol$S7NDR + ethanol$S8NDR + ethanol$S9NDR + ethanol$S10NDR + ethanol$S11NDR
+     + ethanol$S12NDR + ethanol$S13NDR + ethanol$S14NDR + ethanol$S15NDR + ethanol$S16NDR,
+     ylab = "NDR", xlab='Concentration');
