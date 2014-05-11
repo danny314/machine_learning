@@ -15,8 +15,10 @@ public class DataPreProcessor {
 		
 		 FileWriter fw = null;
 		
+		 String userHome = System.getProperty( "user.home" );
+
 		 try {
-	          	Path writePath = Paths.get("/home/puneet/mr/preprocess/batch1.dat");
+			 	Path writePath = Paths.get(userHome + "/mr/preprocess/batch1.dat");
 	          	
 			    boolean deleted = Files.deleteIfExists(writePath);
 			    
@@ -24,7 +26,7 @@ public class DataPreProcessor {
 			    	System.out.println("Previous file deleted");
 			    }
 			    
-	            File newTextFile = new File("/home/puneet/mr/preprocess/batch1.dat");
+	            File newTextFile = new File(userHome + "/mr/preprocess/batch1.dat");
 
 	            fw = new FileWriter(newTextFile);
 
@@ -36,7 +38,7 @@ public class DataPreProcessor {
 			Stream<String> s = null;
 			
 			try {
-				s = Files.lines(Paths.get("/home/puneet/mr/driftdataset/batch1.dat"));
+				s = Files.lines(Paths.get(userHome + "/mr/driftdataset/batch1.dat"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
