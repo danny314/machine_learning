@@ -87,7 +87,10 @@ df = subset(df, select = -c(V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,
                             
 ) );
 
-eth2 = subset(gasdata,gasdata$V1 == 1 & gasdata$V131 == 2);
+gasdata <- NULL;
+eth = subset(df,df$GAS == 1);
+eth2 = subset(df,df$GAS == 1 & df$BATCH == 2);
 
 #Plot DR vs concentration
-plot(eth2$V2,eth2$V3);
+plot(eth$CONC,eth$S3NDR);
+plot(eth2$CONC,eth2$S3NDR);
