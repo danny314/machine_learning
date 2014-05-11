@@ -44,7 +44,6 @@ public class DataPreProcessor {
 				try {
 					s = Files.lines(Paths.get(userHome + "/mr/driftdataset/batch" + j + ".dat"));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -62,17 +61,10 @@ public class DataPreProcessor {
 					String sensorReading = "";
 					
 					for (int i=1; i <= 128; i++) {
-						
 						sensorReading = data[i].split(":")[1];
-						
-						boolean isLastColumn = i == 128;
-						
-						writeData(sensorReading,fw, !isLastColumn);
-						
-						if (isLastColumn) {
-							writeData("\n",fw,false);
-						}
+						writeData(sensorReading,fw, true);
 					}
+					writeData(String.valueOf(j) + "\n",fw,false);
 				}
 			}
 			
