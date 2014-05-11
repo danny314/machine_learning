@@ -88,9 +88,33 @@ df = subset(df, select = -c(V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,
 ) );
 
 gasdata <- NULL;
-eth = subset(df,df$GAS == 1);
-eth2 = subset(df,df$GAS == 1 & df$BATCH == 2);
 
-#Plot DR vs concentration
-plot(eth$CONC,eth$S3NDR);
-plot(eth2$CONC,eth2$S3NDR);
+ethanol = subset(df,df$GAS == 1);
+ethylene = subset(df,df$GAS == 2);
+ammonia = subset(df,df$GAS == 3);
+acetaldehyde = subset(df,df$GAS == 4);
+acetone = subset(df,df$GAS == 5);
+toluene = subset(df,df$GAS == 6);
+
+ethanol1 = subset(ethanol, ethanol$BATCH == 1);
+ethylene1 = subset(ethylene, ethylene$BATCH == 1);
+ammonia1 = subset(ammonia, ammonia$BATCH == 1);
+acetaldehyde1 = subset(acetaldehyde, acetaldehyde$BATCH == 1);
+acetone1 = subset(acetone, acetone$BATCH == 1);
+toluene1 = subset(toluene, toluene$BATCH == 1);
+
+#Plot DR vs concentration for all batches
+plot(ethanol$CONC, ethanol$S1DR);
+plot(ethylene$CONC, ethylene$S1DR);
+plot(ammonia$CONC, ammonia$S1DR);
+plot(acetaldehyde$CONC, acetaldehyde$S1DR);
+plot(acetone$CONC, acetone$S1DR);
+plot(toluene$CONC, toluene$S1DR);
+
+#Plot DR vs concentration for batch 1
+plot(ethanol1$CONC, ethanol1$S1DR);
+plot(ethylene1$CONC, ethylene1$S1DR);
+plot(ammonia1$CONC, ammonia1$S1DR);
+plot(acetaldehyde1$CONC, acetaldehyde1$S1DR);
+plot(acetone1$CONC, acetone1$S1DR);
+plot(toluene1$CONC, toluene1$S1DR);
