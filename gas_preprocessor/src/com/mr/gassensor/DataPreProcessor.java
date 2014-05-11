@@ -16,9 +16,13 @@ public class DataPreProcessor {
 		 FileWriter fw = null;
 		
 		 String userHome = System.getProperty( "user.home" );
+		 
+		 String outputFile = userHome + "/mr/preprocess/allbatches.dat";
 
-		 try {
-			 	Path writePath = Paths.get(userHome + "/mr/preprocess/batch1.dat");
+         File newTextFile = new File(outputFile);
+
+         try {
+			 	Path writePath = Paths.get(outputFile);
 	          	
 			    boolean deleted = Files.deleteIfExists(writePath);
 			    
@@ -26,7 +30,6 @@ public class DataPreProcessor {
 			    	System.out.println("Previous file deleted");
 			    }
 			    
-	            File newTextFile = new File(userHome + "/mr/preprocess/batch1.dat");
 
 	            fw = new FileWriter(newTextFile);
 
@@ -37,39 +40,42 @@ public class DataPreProcessor {
 		
 			Stream<String> s = null;
 			
-			try {
-				s = Files.lines(Paths.get(userHome + "/mr/driftdataset/batch1.dat"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			Iterator<String> iterator = s.iterator();
-			
-			while (iterator.hasNext()) {
-				String line = iterator.next();
-				String[] data = line.split(" ");
+			for (int j=1; j <=10;  j++) {
+				try {
+					s = Files.lines(Paths.get(userHome + "/mr/driftdataset/batch" + j + ".dat"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
-				String[] gasLabelConc = data[0].split(";");
+				Iterator<String> iterator = s.iterator();
 				
-				writeData(gasLabelConc[0],fw, true);
-				writeData(gasLabelConc[1],fw, true);
-				
-				String sensorReading = "";
-				
-				for (int i=1; i <= 128; i++) {
+				while (iterator.hasNext()) {
+					String line = iterator.next();
+					String[] data = line.split(" ");
 					
-					sensorReading = data[i].split(":")[1];
+					String[] gasLabelConc = data[0].split(";");
 					
-					boolean isLastColumn = i == 128;
+					writeData(gasLabelConc[0],fw, true);
+					writeData(gasLabelConc[1],fw, true);
 					
-					writeData(sensorReading,fw, !isLastColumn);
+					String sensorReading = "";
 					
-					if (isLastColumn) {
-						writeData("\n",fw,false);
+					for (int i=1; i <= 128; i++) {
+						
+						sensorReading = data[i].split(":")[1];
+						
+						boolean isLastColumn = i == 128;
+						
+						writeData(sensorReading,fw, !isLastColumn);
+						
+						if (isLastColumn) {
+							writeData("\n",fw,false);
+						}
 					}
 				}
 			}
+			
 			try {
 				fw.close();
 			} catch (IOException e) {
