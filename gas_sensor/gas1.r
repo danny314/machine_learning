@@ -272,3 +272,32 @@ plot(ethanol$CONC, ethanol$S1NDR + ethanol$S2NDR + ethanol$S3NDR + ethanol$S4NDR
      + ethanol$S6NDR + ethanol$S7NDR + ethanol$S8NDR + ethanol$S9NDR + ethanol$S10NDR + ethanol$S11NDR
      + ethanol$S12NDR + ethanol$S13NDR + ethanol$S14NDR + ethanol$S15NDR + ethanol$S16NDR,
      ylab = "NDR", xlab='Concentration');
+
+#PCA
+pca <- prcomp(~ acetone$S1NDR + acetone$S1I_001 + acetone$CONC + acetone$S1I_01 + acetone$S1I_1 + 
+                acetone$S1D_001 + acetone$S1D_01 + acetone$S1D_1, data=acetone,scale=TRUE);
+
+ethanol.num <- subset(ethanol, select=-c(GAS,BATCH));
+pca <- princomp(~ ., data=ethanol.num,scale=TRUE);
+summary(pca,loadings=T)
+
+sink("/home/puneet/mr/output/output.txt"); 
+cor(ethanol1.num);
+sink();
+
+#Linear regression
+ethanol.num <- subset(ethanol, select=-c(GAS,BATCH));
+eth.lm <- lm(data=ethanol, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
+#eth1.lm <- lm(data=ethanol1.num, S1DR + S2DR + S3DR + S4DR + S5DR + S6DR + S7DR + S8DR + S9DR + S10DR + S11DR + S12DR + S13DR + S14DR + S15DR + S16DR ~.);
+summary(eth.lm);
+
+ethanol1.num <- subset(ethanol1, select=-c(GAS,BATCH));
+eth1.lm <- lm(data=ethanol1, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
+#eth1.lm <- lm(data=ethanol1.num, S1DR + S2DR + S3DR + S4DR + S5DR + S6DR + S7DR + S8DR + S9DR + S10DR + S11DR + S12DR + S13DR + S14DR + S15DR + S16DR ~.);
+summary(eth1.lm);
+
+ethanol3.num <- subset(ethanol3, select=-c(GAS,BATCH));
+eth3.lm <- lm(data=ethanol2, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
+#eth2.lm <- lm(data=ethanol2.num, S3NDR~.);
+summary(eth3.lm);
+
