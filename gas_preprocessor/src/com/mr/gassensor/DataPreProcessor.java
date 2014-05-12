@@ -1,3 +1,7 @@
+/**
+ * This class processes gas sensor data into a single batch
+ * @author puneet 
+ */
 package com.mr.gassensor;
 
 import java.io.File;
