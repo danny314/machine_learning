@@ -293,11 +293,16 @@ summary(eth.lm);
 
 ethanol1.num <- subset(ethanol1, select=-c(GAS,BATCH));
 eth1.lm <- lm(data=ethanol1, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
-#eth1.lm <- lm(data=ethanol1.num, S1DR + S2DR + S3DR + S4DR + S5DR + S6DR + S7DR + S8DR + S9DR + S10DR + S11DR + S12DR + S13DR + S14DR + S15DR + S16DR ~.);
 summary(eth1.lm);
 
+ethanol2.num <- subset(ethanol2, select=-c(GAS,BATCH));
+eth2.lm <- lm(data=ethanol2, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
+eth2s2.lm <- lm(data=ethanol2, S2NDR ~ S2I_001 + S2I_01 + S2I_1 + S2D_001 + S2D_01 + S2D_1 + CONC);
+summary(eth2s2.lm);
+
 ethanol3.num <- subset(ethanol3, select=-c(GAS,BATCH));
-eth3.lm <- lm(data=ethanol2, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
-#eth2.lm <- lm(data=ethanol2.num, S3NDR~.);
+eth3.lm <- lm(data=ethanol3, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
 summary(eth3.lm);
 
+temp <- (subset(ethanol2, select=c(CONC,S1DR)));
+temp[with(temp,order(CONC,S1DR)),];
