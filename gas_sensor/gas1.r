@@ -1,7 +1,7 @@
 #Import preprocessed gas sensor array drift data set using space as the separator
 gasdata = read.table(paste(Sys.getenv("HOME"),"/mr/preprocess/allbatches.dat",sep=""),header=F);
 
-df = transform(gasdata,GAS=gasdata$V1, CONC=gasdata$V2,
+df = transform(gasdata,GAS=as.factor(gasdata$V1), CONC=gasdata$V2,
        #sensor 1               
        S1DR = gasdata$V3, S1NDR = gasdata$V4, S1I_001 = gasdata$V5, S1I_01 = gasdata$V6, 
        S1I_1 = gasdata$V7, S1D_001 = gasdata$V8, S1D_01 = gasdata$V9, S1D_1 = gasdata$V10,
@@ -66,7 +66,7 @@ df = transform(gasdata,GAS=gasdata$V1, CONC=gasdata$V2,
        S16DR = gasdata$V123, S16NDR = gasdata$V124, S16I_001 = gasdata$V125, S16I_01 = gasdata$V126, 
        S16I_1 = gasdata$V127, S16D_001 = gasdata$V128, S16D_01 = gasdata$V129, S16D_1 = gasdata$V130,
        
-       BATCH = gasdata$V131
+       BATCH = as.factor(gasdata$V131)
        
 );              
 
