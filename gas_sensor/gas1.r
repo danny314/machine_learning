@@ -306,3 +306,20 @@ summary(eth3.lm);
 
 temp <- (subset(ethanol2, select=c(CONC,S1DR)));
 temp[with(temp,order(CONC,S1DR)),];
+
+plot(ethanol$CONC,ethanol$S1DR + ethanol$S2DR + ethanol$S3DR + ethanol$S4DR + ethanol$S5DR + ethanol$S6DR + ethanol$S7DR + ethanol$S8DR 
+     + ethanol$S9DR + ethanol$S10DR + ethanol$S11DR + ethanol$S12DR + ethanol$S13DR + ethanol$S14DR + ethanol$S15DR + ethanol$S16DR);
+
+plot(ethanol$CONC,ethanol$S1NDR + ethanol$S2NDR + ethanol$S3NDR + ethanol$S4NDR + ethanol$S5NDR + ethanol$S6NDR + ethanol$S7NDR + ethanol$S8NDR 
+     + ethanol$S9NDR + ethanol$S10NDR + ethanol$S11NDR + ethanol$S12NDR + ethanol$S13NDR + ethanol$S14NDR + ethanol$S15NDR + ethanol$S16NDR);
+
+#Handle outliers
+eth1.box <- boxplot(ethanol1$S1DR ~ ethanol1$CONC, data=ethanol1);
+eth1.clean <- subset(ethanol1, !S1DR %in% eth1.box$out);
+
+eth2.box <- boxplot(ethanol2$S1DR ~ ethanol2$CONC, data=ethanol2);
+eth2.clean <- subset(ethanol2, !S1DR %in% eth2.box$out);
+
+#See summary of DR of all 16 sensors
+ethanol.DR <- subset(ethanol, select=c(S1DR,S2DR,S3DR,S4DR,S5DR,S6DR,S7DR,S8DR,S9DR,S10DR,S11DR,S12DR,S13DR,S14DR,S15DR,S16DR));
+summary(ethanol.DR);
