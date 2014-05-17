@@ -253,7 +253,9 @@ plot(ethylene10$CONC, ethylene10$S1DR);
 plot(ammonia10$CONC, ammonia10$S1DR);
 plot(acetaldehyde10$CONC, acetaldehyde10$S1DR);
 plot(acetone10$CONC, acetone10$S1DR);
+
 plot(toluene10$CONC, toluene10$S1DR);
+plot(toluene10$CONC, toluene10$S2DR);
 
 #Plot sum of DR from all sensors vs concentration for batch 10
 plot(ethanol10$CONC, ethanol10$S1DR + ethanol10$S2DR + ethanol10$S3DR + ethanol10$S4DR + ethanol10$S5DR 
