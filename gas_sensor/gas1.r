@@ -150,7 +150,7 @@ ethanol8 = subset(ethanol, ethanol$BATCH == 8);
 ethylene8 = subset(ethylene, ethylene$BATCH == 8);
 ammonia8 = subset(ammonia, ammonia$BATCH == 8);
 acetaldehyde8 = subset(acetaldehyde, acetaldehyde$BATCH == 8);
-acetone8 = subset(acetone, acetone$BATCH == 8;
+acetone8 = subset(acetone, acetone$BATCH == 8);
 toluene8 = subset(toluene, toluene$BATCH == 8);
                   
 ethanol9 = subset(ethanol, ethanol$BATCH == 9);
@@ -251,7 +251,7 @@ plot(toluene9$CONC, toluene9$S1DR);
 plot(ethanol10$CONC, ethanol10$S1DR);
 plot(ethylene10$CONC, ethylene10$S1DR);
 plot(ammonia10$CONC, ammonia10$S1DR);
-plot(acetaldehyde2$CONC, acetaldehyde10$S1DR);
+plot(acetaldehyde10$CONC, acetaldehyde10$S1DR);
 plot(acetone10$CONC, acetone10$S1DR);
 plot(toluene10$CONC, toluene10$S1DR);
 
