@@ -150,7 +150,7 @@ ethanol8 = subset(ethanol, ethanol$BATCH == 8);
 ethylene8 = subset(ethylene, ethylene$BATCH == 8);
 ammonia8 = subset(ammonia, ammonia$BATCH == 8);
 acetaldehyde8 = subset(acetaldehyde, acetaldehyde$BATCH == 8);
-acetone8 = subset(acetone, acetone$BATCH == 8;
+acetone8 = subset(acetone, acetone$BATCH == 8);
 toluene8 = subset(toluene, toluene$BATCH == 8);
                   
 ethanol9 = subset(ethanol, ethanol$BATCH == 9);
@@ -169,15 +169,15 @@ toluene10 = subset(toluene, toluene$BATCH == 10);
                   
 
 #Plot DR vs concentration for all batches
-plot(ethanol$CONC, ethanol$S1DR);
-plot(ethylene$CONC, ethylene$S1DR);
-plot(ammonia$CONC, ammonia$S1DR);
-plot(acetaldehyde$CONC, acetaldehyde$S1DR);
-plot(acetone$CONC, acetone$S1DR);
-plot(toluene$CONC, toluene$S1DR);
+plot(ethanol$CONC, ethanol$S1DR, main="Ethanol", xlab="Concentration",ylab="S1DR");
+plot(ethylene$CONC, ethylene$S1DR, main="Ethylene", xlab="Concentration",ylab="S1DR");
+plot(ammonia$CONC, ammonia$S1DR, main="Ammonia", xlab="Concentration",ylab="S1DR");
+plot(acetaldehyde$CONC, acetaldehyde$S1DR, main="Acetaldehyde", xlab="Concentration",ylab="S1DR");
+plot(acetone$CONC, acetone$S1DR, main="Acetone", xlab="Concentration",ylab="S1DR");
+plot(toluene$CONC, toluene$S1DR, main="Toluene", xlab="Concentration",ylab="S1DR");
 
 #Plot DR vs concentration for batch 1
-plot(ethanol1$CONC, ethanol1$S1DR);
+plot(ethanol1$CONC, ethanol1$S1DR, main="Ethanol 1", xlab="Concentration",ylab="S1DR");
 plot(ethylene1$CONC, ethylene1$S1DR);
 plot(ammonia1$CONC, ammonia1$S1DR);
 plot(acetaldehyde1$CONC, acetaldehyde1$S1DR);
@@ -185,7 +185,7 @@ plot(acetone1$CONC, acetone1$S1DR);
 plot(toluene1$CONC, toluene1$S1DR);
 
 #Plot DR vs concentration for batch 2
-plot(ethanol2$CONC, ethanol2$S1DR);
+plot(ethanol2$CONC, ethanol2$S1DR, main="Ethanol 2", xlab="Concentration",ylab="S1DR");
 plot(ethylene2$CONC, ethylene2$S1DR);
 plot(ammonia2$CONC, ammonia2$S1DR);
 plot(acetaldehyde2$CONC, acetaldehyde2$S1DR);
@@ -193,14 +193,14 @@ plot(acetone2$CONC, acetone2$S1DR);
 plot(toluene2$CONC, toluene2$S1DR);
 
 #Plot DR vs concentration for batch 3
-plot(ethanol3$CONC, ethanol3$S1DR);
+plot(ethanol3$CONC, ethanol3$S1DR, main="Ethanol 3", xlab="Concentration",ylab="S1DR");
 plot(ethylene3$CONC, ethylene3$S1DR);
 plot(ammonia3$CONC, ammonia3$S1DR);
 plot(acetaldehyde3$CONC, acetaldehyde3$S1DR);
 plot(acetone3$CONC, acetone3$S1DR);
 
 #Plot DR vs concentration for batch 4
-plot(ethanol4$CONC, ethanol4$S1DR);
+plot(ethanol4$CONC, ethanol4$S1DR, main="Ethanol 4", xlab="Concentration",ylab="S1DR");
 plot(ethylene4$CONC, ethylene4$S1DR);
 plot(ammonia4$CONC, ammonia4$S1DR);
 plot(acetaldehyde4$CONC, acetaldehyde4$S1DR);
@@ -208,7 +208,7 @@ plot(acetone4$CONC, acetone4$S1DR);
 plot(toluene4$CONC, toluene4$S1DR);
 
 #Plot DR vs concentration for batch 5
-plot(ethanol5$CONC, ethanol5$S1DR);
+plot(ethanol5$CONC, ethanol5$S1DR, main="Ethanol 5", xlab="Concentration",ylab="S1DR");
 plot(ethylene5$CONC, ethylene5$S1DR);
 plot(ammonia5$CONC, ammonia5$S1DR);
 plot(acetaldehyde5$CONC, acetaldehyde5$S1DR);
@@ -216,7 +216,7 @@ plot(acetone5$CONC, acetone5$S1DR);
 plot(toluene5$CONC, toluene5$S1DR);
 
 #Plot DR vs concentration for batch 6
-plot(ethanol6$CONC, ethanol6$S1DR);
+plot(ethanol6$CONC, ethanol6$S1DR, main="Ethanol 6", xlab="Concentration",ylab="S1DR");
 plot(ethylene6$CONC, ethylene6$S1DR);
 plot(ammonia6$CONC, ammonia6$S1DR);
 plot(acetaldehyde6$CONC, acetaldehyde6$S1DR);
@@ -224,7 +224,7 @@ plot(acetone6$CONC, acetone6$S1DR);
 plot(toluene6$CONC, toluene6$S1DR);
 
 #Plot DR vs concentration for batch 7
-plot(ethanol7$CONC, ethanol7$S1DR);
+plot(ethanol7$CONC, ethanol7$S1DR, main="Ethanol 7", xlab="Concentration",ylab="S1DR");
 plot(ethylene7$CONC, ethylene7$S1DR);
 plot(ammonia7$CONC, ammonia7$S1DR);
 plot(acetaldehyde7$CONC, acetaldehyde7$S1DR);
@@ -232,7 +232,7 @@ plot(acetone7$CONC, acetone7$S1DR);
 plot(toluene7$CONC, toluene7$S1DR);
 
 #Plot DR vs concentration for batch 8
-plot(ethanol8$CONC, ethanol8$S1DR);
+plot(ethanol8$CONC, ethanol8$S1DR, main="Ethanol 8", xlab="Concentration",ylab="S1DR");
 plot(ethylene8$CONC, ethylene8$S1DR);
 plot(ammonia8$CONC, ammonia8$S1DR);
 plot(acetaldehyde8$CONC, acetaldehyde8$S1DR);
@@ -240,7 +240,7 @@ plot(acetone8$CONC, acetone8$S1DR);
 plot(toluene8$CONC, toluene8$S1DR);
 
 #Plot DR vs concentration for batch 9
-plot(ethanol9$CONC, ethanol9$S1DR);
+plot(ethanol9$CONC, ethanol9$S1DR, main="Ethanol 9", xlab="Concentration",ylab="S1DR");
 plot(ethylene9$CONC, ethylene9$S1DR);
 plot(ammonia9$CONC, ammonia9$S1DR);
 plot(acetaldehyde9$CONC, acetaldehyde9$S1DR);
@@ -248,12 +248,14 @@ plot(acetone9$CONC, acetone9$S1DR);
 plot(toluene9$CONC, toluene9$S1DR);
 
 #Plot DR vs concentration for batch 10
-plot(ethanol10$CONC, ethanol10$S1DR);
+plot(ethanol10$CONC, ethanol10$S1DR, main="Ethanol 10", xlab="Concentration",ylab="S1DR");
 plot(ethylene10$CONC, ethylene10$S1DR);
 plot(ammonia10$CONC, ammonia10$S1DR);
-plot(acetaldehyde2$CONC, acetaldehyde10$S1DR);
+plot(acetaldehyde10$CONC, acetaldehyde10$S1DR);
 plot(acetone10$CONC, acetone10$S1DR);
-plot(toluene10$CONC, toluene10$S1DR);
+
+plot(toluene10$CONC, toluene10$S1DR, main="Toluene 10", xlab="Concentration",ylab="S1DR");
+plot(toluene10$CONC, toluene10$S2DR, main="Toluene 10", xlab="Concentration",ylab="S2DR");
 
 #Plot sum of DR from all sensors vs concentration for batch 10
 plot(ethanol10$CONC, ethanol10$S1DR + ethanol10$S2DR + ethanol10$S3DR + ethanol10$S4DR + ethanol10$S5DR 
@@ -265,7 +267,7 @@ plot(ethanol10$CONC, ethanol10$S1DR + ethanol10$S2DR + ethanol10$S3DR + ethanol1
 plot(ethanol$CONC, ethanol$S1DR + ethanol$S2DR + ethanol$S3DR + ethanol$S4DR + ethanol$S5DR 
      + ethanol$S6DR + ethanol$S7DR + ethanol$S8DR + ethanol$S9DR + ethanol$S10DR + ethanol$S11DR
      + ethanol$S12DR + ethanol$S13DR + ethanol$S14DR + ethanol$S15DR + ethanol$S16DR,
-     ylab = "S1DR", xlab='Concentration');
+     ylab = "Sum of DR for All Sensors", xlab='Concentration');
 
 #Plot sum of NDR from all sensors vs concentration for all batches
 plot(ethanol$CONC, ethanol$S1NDR + ethanol$S2NDR + ethanol$S3NDR + ethanol$S4NDR + ethanol$S5NDR 
@@ -299,6 +301,7 @@ ethanol.num <- subset(ethanol, select=-c(GAS,BATCH));
 eth.lm <- lm(data=ethanol, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
 #eth1.lm <- lm(data=ethanol1.num, S1DR + S2DR + S3DR + S4DR + S5DR + S6DR + S7DR + S8DR + S9DR + S10DR + S11DR + S12DR + S13DR + S14DR + S15DR + S16DR ~.);
 summary(eth.lm);
+plot(eth.lm);
 
 ethanol1.num <- subset(ethanol1, select=-c(GAS,BATCH));
 eth1.lm <- lm(data=ethanol1, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
