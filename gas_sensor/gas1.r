@@ -276,21 +276,41 @@ plot(ethanol$CONC, ethanol$S1NDR + ethanol$S2NDR + ethanol$S3NDR + ethanol$S4NDR
      ylab = "NDR", xlab='Concentration');
 
 #PCA
+#ethanol
 pca <- prcomp(~ acetone$S1NDR + acetone$S1I_001 + acetone$CONC + acetone$S1I_01 + acetone$S1I_1 + 
                 acetone$S1D_001 + acetone$S1D_01 + acetone$S1D_1, data=acetone,scale=TRUE);
 
 ethanol.num <- subset(ethanol, select=-c(GAS,BATCH));
 ethanol.num.s1 <- subset(ethanol, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
+
 ethanol1.num.s1 <- subset(ethanol1, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
 
 pca <- princomp(~ ., data=ethanol1.num.s1,scale=TRUE, center=TRUE);
 pca <- princomp(~ ., data=ethanol.num.s1,scale=TRUE, center=TRUE);
 
-pca <- prcomp(ethanol1.num.s1,scale=TRUE, center=TRUE);
-pca <- prcomp(ethanol.num.s1,scale=TRUE, center=TRUE);
+pca.eth1.s1 <- prcomp(ethanol1.num.s1,scale=TRUE, center=TRUE);
+pca.eth.s1 <- prcomp(ethanol.num.s1,scale=TRUE, center=TRUE);
 
-summary(pca);
-plot(pca);
+summary(pca.eth.s1);
+pca.eth.s1$rotation;
+plot(pca.eth.s1, main="PCA Ethanol Sensor 1");
+biplot(pca.eth.s1);
+
+#ethylene
+ethylene.num.s1 <- subset(ethylene, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
+pca.ethy.s1 <- prcomp(ethylene.num.s1,scale=TRUE, center=TRUE);
+summary(pca.ethy.s1);
+pca.ethy.s1$rotation;
+plot(pca.ethy.s1, main="PCA Ethylene Sensor 1");
+biplot(pca.ethy.s1);
+
+#acetaldehyde
+acetaldehyde.num.s1 <- subset(acetaldehyde, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
+pca.acetaldehyde.s1 <- prcomp(acetaldehyde.num.s1,scale=TRUE, center=TRUE);
+summary(pca.acetaldehyde.s1);
+pca.acetaldehyde.s1$rotation;
+plot(pca.acetaldehyde.s1, main="PCA acetaldehyde Sensor 1");
+biplot(pca.acetaldehyde.s1);
 
 sink("/home/puneet/mr/output/output.txt"); 
 cor(ethanol1.num);
