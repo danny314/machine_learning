@@ -278,8 +278,17 @@ pca <- prcomp(~ acetone$S1NDR + acetone$S1I_001 + acetone$CONC + acetone$S1I_01 
                 acetone$S1D_001 + acetone$S1D_01 + acetone$S1D_1, data=acetone,scale=TRUE);
 
 ethanol.num <- subset(ethanol, select=-c(GAS,BATCH));
-pca <- princomp(~ ., data=ethanol.num,scale=TRUE);
-summary(pca,loadings=T)
+ethanol.num.s1 <- subset(ethanol, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
+ethanol1.num.s1 <- subset(ethanol1, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
+
+pca <- princomp(~ ., data=ethanol1.num.s1,scale=TRUE, center=TRUE);
+pca <- princomp(~ ., data=ethanol.num.s1,scale=TRUE, center=TRUE);
+
+pca <- prcomp(ethanol1.num.s1,scale=TRUE, center=TRUE);
+pca <- prcomp(ethanol.num.s1,scale=TRUE, center=TRUE);
+
+summary(pca);
+plot(pca);
 
 sink("/home/puneet/mr/output/output.txt"); 
 cor(ethanol1.num);
