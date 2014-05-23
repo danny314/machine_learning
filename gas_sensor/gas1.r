@@ -1,3 +1,5 @@
+options("width"=200);
+
 #Import preprocessed gas sensor array drift data set using space as the separator
 gasdata = read.table(paste(Sys.getenv("HOME"),"/mr/preprocess/allbatches.dat",sep=""),header=F);
 
@@ -355,3 +357,8 @@ eth2.clean <- subset(ethanol2, !S1DR %in% eth2.box$out);
 #See summary of DR of all 16 sensors
 ethanol.DR <- subset(ethanol, select=c(S1DR,S2DR,S3DR,S4DR,S5DR,S6DR,S7DR,S8DR,S9DR,S10DR,S11DR,S12DR,S13DR,S14DR,S15DR,S16DR));
 summary(ethanol.DR);
+
+#Sampling
+df.sample = sample(nrow(df),10);
+df.sample = df[df.sample,];
+subset(df.sample,select = c(GAS,CONC, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
