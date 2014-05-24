@@ -334,9 +334,8 @@ eth2.lm <- lm(data=ethanol2, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01
 eth2s2.lm <- lm(data=ethanol2, S2NDR ~ S2I_001 + S2I_01 + S2I_1 + S2D_001 + S2D_01 + S2D_1 + CONC);
 summary(eth2s2.lm);
 
-ethanol3.num <- subset(ethanol3, select=-c(GAS,BATCH));
-eth3.lm <- lm(data=ethanol3, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
-summary(eth3.lm);
+df.lm <- lm(data=df, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC + GAS + BATCH);
+summary(df.lm);
 
 temp <- (subset(ethanol2, select=c(CONC,S1DR)));
 temp[with(temp,order(CONC,S1DR)),];
@@ -358,7 +357,20 @@ eth2.clean <- subset(ethanol2, !S1DR %in% eth2.box$out);
 ethanol.DR <- subset(ethanol, select=c(S1DR,S2DR,S3DR,S4DR,S5DR,S6DR,S7DR,S8DR,S9DR,S10DR,S11DR,S12DR,S13DR,S14DR,S15DR,S16DR));
 summary(ethanol.DR);
 
-#Sampling
-df.sample = sample(nrow(df),10);
-df.sample = df[df.sample,];
-subset(df.sample,select = c(GAS,CONC, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
+#Sampling ethanol batch 1
+eth1.sample = sample(nrow(ethanol1),5);
+eth1.sample = ethanol1[eth1.sample,];
+eth1.sample = subset(eth1.sample,select = c(GAS,CONC, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
+eth1.sample[with(eth1.sample, order(CONC)), ]
+
+#Sampling ethanol batch 2
+eth2.sample = sample(nrow(ethanol2),5);
+eth2.sample = ethanol2[eth2.sample,];
+eth2.sample = subset(eth2.sample,select = c(GAS,CONC, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
+eth2.sample[with(eth2.sample, order(CONC)), ]
+
+#Sampling ethanol batch 10
+eth10.sample = sample(nrow(ethanol10),5);
+eth10.sample = ethanol10[eth10.sample,];
+eth10.sample = subset(eth10.sample,select = c(GAS,CONC, BATCH, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
+eth10.sample[with(eth10.sample, order(CONC)),]
