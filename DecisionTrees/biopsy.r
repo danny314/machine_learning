@@ -13,5 +13,5 @@ print(biopsy.fit.gini);
 biopsy.fit.entropy <- rpart(class ~ V1+V2+V3+V4+V5+V6+V7+V8+V9, data=biopsy, method="class",parms=list(split="information"),maxdepth=2);
 plot(biopsy.fit.entropy);
 text(biopsy.fit.entropy);
-print(biopsy.fit.gini);
+print(biopsy.fit.entropy);
 
