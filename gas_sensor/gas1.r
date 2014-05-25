@@ -375,7 +375,7 @@ eth10.sample = ethanol10[eth10.sample,];
 eth10.sample = subset(eth10.sample,select = c(GAS,CONC, BATCH, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
 eth10.sample[with(eth10.sample, order(CONC)),]
 
-#split data into training and test (70% training and 30% test)
+#split data into training and test (80% training and 20% test)
 train.idx <-sample(nrow(df), floor(nrow(df)*0.8), replace=FALSE);
 df.train <- df[train.idx, ];
 df.test <- df[-train.idx,];
