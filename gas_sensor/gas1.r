@@ -408,3 +408,34 @@ test.class = as.vector(df.test$GAS);
 wrong.pred <- length( which(test.class != df.pred));
 class.pred.error = (wrong.pred / length(test.class));
 class.pred.error;
+
+#See misclassification table
+table(df.pred,test.class);
+
+#Decision tree using tree library
+library(tree);
+tree.df = tree(GAS ~ . - GAS, data=df.train);
+summary(tree.df);
+
+#Predict and compute error
+tree.df.pred = predict(tree.df,df.test,type="class");
+wrong.pred <- length( which(test.class != tree.df.pred));
+class.pred.error = (wrong.pred / length(test.class));
+class.pred.error;
+
+#Do cross validation
+cv.tree.df = cv.tree(tree.df,FUN=prune.misclass); 
+cv.tree.df;
+
+#Plots
+#par(mfrow=c(1,2));
+#plot(cv.tree.df$size,cv.tree.df$dev,type="b");
+#plot(cv.tree.df$k,cv.tree.df$dev,type="b");
+
+
+#Prune the tree based on cv results
+prune.tree.df = prune.misclass(tree.df,best=19);
+prune.tree.df.pred = predict(prune.tree.df,df.test,type="class");
+wrong.pred <- length( which(test.class != prune.tree.df.pred));
+class.pred.error = (wrong.pred / length(test.class));
+class.pred.error;
