@@ -381,7 +381,31 @@ df.train <- df[train.idx, ];
 df.test <- df[-train.idx,];
 
 #Decision Tree
+library(rpart);
+
+#Using sensor 1
 df.dt <- rpart(GAS ~ S1DR + S1NDR + S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC + BATCH, data=df.train, method="class");
+
+#Using all sensors
+df.dt <- rpart(GAS ~ S1DR + S1NDR + S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 
+                + S2DR + S2NDR + S2I_001 + S2I_01 + S2I_1 + S2D_001 + S2D_01 + S2D_1 
+               + S3DR + S3NDR + S3I_001 + S3I_01 + S3I_1 + S3D_001 + S3D_01 + S3D_1 
+               + S4DR + S4NDR + S4I_001 + S4I_01 + S4I_1 + S4D_001 + S4D_01 + S4D_1 
+               + S5DR + S5NDR + S5I_001 + S5I_01 + S5I_1 + S5D_001 + S5D_01 + S5D_1 
+               + S6DR + S6NDR + S6I_001 + S6I_01 + S6I_1 + S6D_001 + S6D_01 + S6D_1 
+               + S7DR + S7NDR + S7I_001 + S7I_01 + S7I_1 + S7D_001 + S7D_01 + S7D_1 
+               + S8DR + S8NDR + S8I_001 + S8I_01 + S8I_1 + S8D_001 + S8D_01 + S8D_1 
+               + S9DR + S9NDR + S9I_001 + S9I_01 + S9I_1 + S9D_001 + S9D_01 + S9D_1 
+               + S10DR + S10NDR + S10I_001 + S10I_01 + S10I_1 + S10D_001 + S10D_01 + S10D_1 
+               + S11DR + S11NDR + S11I_001 + S11I_01 + S11I_1 + S11D_001 + S11D_01 + S11D_1 
+               + S12DR + S12NDR + S12I_001 + S12I_01 + S12I_1 + S12D_001 + S12D_01 + S12D_1 
+               + S13DR + S13NDR + S13I_001 + S13I_01 + S13I_1 + S13D_001 + S13D_01 + S13D_1 
+               + S14DR + S14NDR + S14I_001 + S14I_01 + S14I_1 + S14D_001 + S14D_01 + S14D_1 
+               + S15DR + S15NDR + S15I_001 + S15I_01 + S15I_1 + S15D_001 + S15D_01 + S15D_1 
+               + S16DR + S16NDR + S16I_001 + S16I_01 + S16I_1 + S16D_001 + S16D_01 + S16D_1 
+               
+               + CONC + BATCH, data=df.train, method="class");
+
 printcp(df.dt);
 plotcp(df.dt);
 plot(df.dt, uniform=TRUE, main="Decision Tree");
@@ -397,3 +421,9 @@ text(df.pdt, use.n=TRUE, all=TRUE, cex=.8);
 df.pred = predict(df.pdt,df.test,type="class");
 dim(df.pred);
 head(df.pred);
+
+#Find test error
+test.class = as.vector(df.test$GAS);
+wrong.pred <- length( which(test.class != df.pred));
+class.pred.error = (wrong.pred / length(test.class));
+class.pred.error;
