@@ -420,6 +420,7 @@ summary(tree.df);
 #Predict and compute error
 tree.df.pred = predict(tree.df,df.test,type="class");
 wrong.pred <- length( which(test.class != tree.df.pred));
+test.class = as.vector(df.test$GAS);
 class.pred.error = (wrong.pred / length(test.class));
 class.pred.error;
 
@@ -436,6 +437,16 @@ cv.tree.df;
 #Prune the tree based on cv results
 prune.tree.df = prune.misclass(tree.df,best=19);
 prune.tree.df.pred = predict(prune.tree.df,df.test,type="class");
+test.class = as.vector(df.test$GAS);
 wrong.pred <- length( which(test.class != prune.tree.df.pred));
+class.pred.error = (wrong.pred / length(test.class));
+class.pred.error;
+
+#Random forest with bagging
+library(randomForest);
+bag.df = randomForest(GAS ~ . - GAS, data=df.train, mtry = 130, importance=TRUE);
+bag.df.pred = predict(bag.df,df.test,type="class");
+test.class = as.vector(df.test$GAS);
+wrong.pred <- length( which(test.class != bag.df.pred));
 class.pred.error = (wrong.pred / length(test.class));
 class.pred.error;
