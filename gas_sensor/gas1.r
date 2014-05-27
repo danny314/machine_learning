@@ -463,7 +463,7 @@ class.pred.error;
 #Boosting
 library(gbm);
 boost.df = gbm(GAS ~ . - GAS, data=df.train, distribution="multinomial", n.tree = 5000, interaction.depth=4);
-forest.df.pred = predict(boost.df,df.test,type="class",n.tree=5000);
+boost.df.pred = predict(boost.df,df.test,n.tree=5000);
 test.class = as.vector(df.test$GAS);
 wrong.pred <- length( which(test.class != boost.df.pred));
 class.pred.error = (wrong.pred / length(test.class));
