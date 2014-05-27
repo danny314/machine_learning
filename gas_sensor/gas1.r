@@ -442,11 +442,29 @@ wrong.pred <- length( which(test.class != prune.tree.df.pred));
 class.pred.error = (wrong.pred / length(test.class));
 class.pred.error;
 
-#Random forest with bagging
+#Bagged trees
 library(randomForest);
 bag.df = randomForest(GAS ~ . - GAS, data=df.train, mtry = 130, importance=TRUE);
 bag.df.pred = predict(bag.df,df.test,type="class");
 test.class = as.vector(df.test$GAS);
 wrong.pred <- length( which(test.class != bag.df.pred));
+class.pred.error = (wrong.pred / length(test.class));
+class.pred.error;
+
+#Random forest
+library(randomForest);
+forest.df = randomForest(GAS ~ . - GAS, data=df.train, mtry = 12, importance=TRUE);
+forest.df.pred = predict(forest.df,df.test,type="class");
+test.class = as.vector(df.test$GAS);
+wrong.pred <- length( which(test.class != forest.df.pred));
+class.pred.error = (wrong.pred / length(test.class));
+class.pred.error;
+
+#Boosting
+library(gbm);
+boost.df = gbm(GAS ~ . - GAS, data=df.train, distribution="multinomial", n.tree = 5000, interaction.depth=4);
+forest.df.pred = predict(boost.df,df.test,type="class",n.tree=5000);
+test.class = as.vector(df.test$GAS);
+wrong.pred <- length( which(test.class != boost.df.pred));
 class.pred.error = (wrong.pred / length(test.class));
 class.pred.error;
