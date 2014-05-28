@@ -461,11 +461,23 @@ calculateTestError(forest.df.pred,test.class);
 plot(forest.df);
 forest.df;
 
-#Boosting
+#Boosting using gbm (does not work)
 library(gbm);
 boost.df = gbm(GAS ~ . - GAS, data=df.train, distribution="multinomial", n.tree = 5000, interaction.depth=4);
-boost.df.pred = predict(boost.df,df.test,n.tree=5000);
-test.class = as.vector(df.test$GAS);
-wrong.pred <- length( which(test.class != boost.df.pred));
-class.pred.error = (wrong.pred / length(test.class));
-class.pred.error;
+boost.df.pred = predict.gbm(boost.df,df.test,n.tree=5000);
+calculateTestError(boost.df.pred,test.class);
+
+#Boosting using adabag
+library(adabag);
+adaboost.df = boosting(GAS ~ . - GAS, data=df.train);
+adaboost.df.pred = predict(adaboost.df,df.test,type="class");
+adaboost.df.pred$confusion;
+adaboost.df.pred$error;
+
+evol.train = errorevol(adaboost.df,newdata=df.train);
+evol.test = errorevol(adaboost.df,newdata=df.test);
+
+#comparing error evolution in training and test set
+plot(evol.test$error, type="l",main="AdaBoost error Vs number of trees", xlab="Iterations", ylab="Error", col = "red") 
+lines(evol.train$error, cex = .5 ,col="blue", lty=2);
+legend("topright", c("Test","Train"), col = c("red", "blue"), lty=1:2);
