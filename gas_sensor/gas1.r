@@ -91,6 +91,11 @@ df = subset(df, select = -c(V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,
 
 gasdata <- NULL;
 
+calculateTestError <- function(predictedClass,trueClass) {
+  tab <- table(predictedClass,trueClass);
+  return (1-sum(diag(tab))/sum(tab));
+}
+
 ethanol = subset(df,df$GAS == 1);
 ethylene = subset(df,df$GAS == 2);
 ammonia = subset(df,df$GAS == 3);
@@ -382,51 +387,53 @@ df.test <- df[-train.idx,];
 
 #Decision Tree
 library(rpart);
+library(rpart.plot);
+library(rattle);
+library(RColorBrewer);
 
-#Using sensor 1
-#df.dt <- rpart(GAS ~ S1DR + S1NDR + S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC + BATCH, data=df.train, method="class");
-
-#Using all sensors
+#Using rpart package
 df.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class");
+df.dt;
+printcp(df.dt);
+plotcp(df.dt);
+plot(df.dt, uniform=TRUE, main="Unpruned Analyte Classification Tree");
+text(df.dt, cex=.8);
+#Find dimensions
+#par("usr");
+legend("bottomleft", c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.8);
 
-#printcp(df.dt);
-#plotcp(df.dt);
-#plot(df.dt, uniform=TRUE, main="Decision Tree");
-#text(df.dt, use.n=TRUE, all=TRUE, cex=.8)
+#prp(df.dt);
+#legend("bottomleft", c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.6);
 
-# prune the tree 
+#fancyRpartPlot(df.dt);
+
+# Prune the tree 
 df.pdt<- prune(df.dt, cp= df.dt$cptable[which.min(df.dt$cptable[,"xerror"]),"CP"]);
+plot(df.pdt, uniform=TRUE, main="Pruned Analyte Classification Tree");
+text(df.pdt, cex=.8);
 
-# plot the pruned tree 
-#plot(df.pdt, uniform=TRUE, main="Pruned Decision Tree")
-#text(df.pdt, use.n=TRUE, all=TRUE, cex=.8);
-
+#Predict
 df.pred = predict(df.pdt,df.test,type="class");
 
 #Find test error
-test.class = as.vector(df.test$GAS);
-wrong.pred <- length( which(test.class != df.pred));
-class.pred.error = (wrong.pred / length(test.class));
-class.pred.error;
-
-#See misclassification table
-table(df.pred,test.class);
+calculateTestError(df.pred,test.class);
 
 #Decision tree using tree library
 library(tree);
 tree.df = tree(GAS ~ . - GAS, data=df.train);
 summary(tree.df);
+plot(tree.df, main="Unpruned Analyte Classification Tree");
+text(tree.df, cex=.8);
 
 #Predict and compute error
 tree.df.pred = predict(tree.df,df.test,type="class");
-wrong.pred <- length( which(test.class != tree.df.pred));
-test.class = as.vector(df.test$GAS);
-class.pred.error = (wrong.pred / length(test.class));
-class.pred.error;
+calculateTestError(tree.df.pred,test.class);
 
 #Do cross validation
 cv.tree.df = cv.tree(tree.df,FUN=prune.misclass); 
 cv.tree.df;
+plot(cv.tree.df, main="Cross Validated Pruned Analyte Classification Tree");
+text(cv.tree.df, cex=.8);
 
 #Plots
 #par(mfrow=c(1,2));
@@ -435,30 +442,24 @@ cv.tree.df;
 
 
 #Prune the tree based on cv results
-prune.tree.df = prune.misclass(tree.df,best=19);
+prune.tree.df = prune.misclass(tree.df,best=20);
 prune.tree.df.pred = predict(prune.tree.df,df.test,type="class");
-test.class = as.vector(df.test$GAS);
-wrong.pred <- length( which(test.class != prune.tree.df.pred));
-class.pred.error = (wrong.pred / length(test.class));
-class.pred.error;
+calculateTestError(prune.tree.df.pred,test.class);
 
 #Bagged trees
 library(randomForest);
 bag.df = randomForest(GAS ~ . - GAS, data=df.train, mtry = 130, importance=TRUE);
 bag.df.pred = predict(bag.df,df.test,type="class");
-test.class = as.vector(df.test$GAS);
-wrong.pred <- length( which(test.class != bag.df.pred));
-class.pred.error = (wrong.pred / length(test.class));
-class.pred.error;
+calculateTestError(bag.df.pred,test.class);
+plot(bag.df);
 
 #Random forest
 library(randomForest);
 forest.df = randomForest(GAS ~ . - GAS, data=df.train, mtry = 12, importance=TRUE);
 forest.df.pred = predict(forest.df,df.test,type="class");
-test.class = as.vector(df.test$GAS);
-wrong.pred <- length( which(test.class != forest.df.pred));
-class.pred.error = (wrong.pred / length(test.class));
-class.pred.error;
+calculateTestError(forest.df.pred,test.class);
+plot(forest.df);
+forest.df;
 
 #Boosting
 library(gbm);
