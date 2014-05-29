@@ -467,15 +467,24 @@ boost.df = gbm(GAS ~ . - GAS, data=df.train, distribution="multinomial", n.tree 
 boost.df.pred = predict.gbm(boost.df,df.test,n.tree=5000);
 calculateTestError(boost.df.pred,test.class);
 
-#Boosting using adabag
+#Boosting using adabag and Breiman coefficient
 library(adabag);
 adaboost.df = boosting(GAS ~ . - GAS, data=df.train);
 adaboost.df.pred = predict(adaboost.df,df.test,type="class");
 adaboost.df.pred$confusion;
 adaboost.df.pred$error;
-
 evol.train = errorevol(adaboost.df,newdata=df.train);
 evol.test = errorevol(adaboost.df,newdata=df.test);
+
+#Boosting using adabag and Zhu coefficient and SAMME algorithm
+library(adabag);
+adaboost.df = boosting(GAS ~ . - GAS, data=df.train, coeflearn="Zhu");
+adaboost.df.pred = predict(adaboost.df,df.test,type="class");
+adaboost.df.pred$confusion;
+adaboost.df.pred$error;
+evol.train = errorevol(adaboost.df,newdata=df.train);
+evol.test = errorevol(adaboost.df,newdata=df.test);
+
 
 #comparing error evolution in training and test set
 plot(evol.test$error, type="l",main="AdaBoost error Vs number of trees", xlab="Iterations", ylab="Error", col = "red") 
