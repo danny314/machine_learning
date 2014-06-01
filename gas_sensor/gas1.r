@@ -293,15 +293,20 @@ ethanol.num.s1 <- subset(ethanol, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, 
 ethanol1.num.s1 <- subset(ethanol1, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
 
 pca <- princomp(~ ., data=ethanol1.num.s1,scale=TRUE, center=TRUE);
-pca <- princomp(~ ., data=ethanol.num.s1,scale=TRUE, center=TRUE);
+pca <- princomp(~ ., data=ethanol.num,scale=TRUE, center=TRUE);
 
 pca.eth1.s1 <- prcomp(ethanol1.num.s1,scale=TRUE, center=TRUE);
-pca.eth.s1 <- prcomp(ethanol.num.s1,scale=TRUE, center=TRUE);
+pca.eth <- prcomp(ethanol.num,scale=TRUE, center=TRUE);
 
 summary(pca.eth.s1);
 pca.eth.s1$rotation;
 plot(pca.eth.s1, main="PCA Ethanol Sensor 1");
 biplot(pca.eth.s1);
+
+summary(pca.eth);
+pca.eth$rotation;
+plot(pca.eth, main="PCA Ethanol");
+biplot(pca.eth);
 
 #ethylene
 ethylene.num.s1 <- subset(ethylene, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
