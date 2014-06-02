@@ -108,7 +108,7 @@ entropy.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class",parms=list(spli
 entropy.dt;
 printcp(entropy.dt);
 plotcp(entropy.dt);
-plot(entropy.dt, uniform=TRUE, main="Classification Tree (Entropy Split)");
+plot(entropy.dt, uniform=TRUE);
 text(entropy.dt, cex=.8);
 #Find dimensions
 par("usr");
@@ -127,7 +127,7 @@ calculateTestError(entropy.pred,test.class);
 #Do 10 fold cross validation using entropy tree
 #split data into training and test (80% training and 20% test)
 set.seed(6721);
-k = 10;
+k = 1;
 enrtopy.cv.error.arr= rep (0,k);
 for (i in 1:k) {
   train.idx <-sample(nrow(df), floor(nrow(df)*0.8), replace=FALSE);
@@ -144,7 +144,7 @@ enrtopy.cv.error;
 
 #Do cross validation using gini split
 set.seed(7412);
-k = 10;
+k = 1;
 gini.cv.error.arr = rep (0,k);
 for (i in 1:k) {
   train.idx <-sample(nrow(df), floor(nrow(df)*0.8), replace=FALSE);
