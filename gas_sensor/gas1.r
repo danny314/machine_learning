@@ -176,12 +176,12 @@ toluene10 = subset(toluene, toluene$BATCH == 10);
                   
 
 #Plot DR vs concentration for all batches
-plot(ethanol$CONC, ethanol$S1DR, main="Ethanol", xlab="Concentration",ylab="S1DR");
-plot(ethylene$CONC, ethylene$S1DR, main="Ethylene", xlab="Concentration",ylab="S1DR");
-plot(ammonia$CONC, ammonia$S1DR, main="Ammonia", xlab="Concentration",ylab="S1DR");
-plot(acetaldehyde$CONC, acetaldehyde$S1DR, main="Acetaldehyde", xlab="Concentration",ylab="S1DR");
-plot(acetone$CONC, acetone$S1DR, main="Acetone", xlab="Concentration",ylab="S1DR");
-plot(toluene$CONC, toluene$S1DR, main="Toluene", xlab="Concentration",ylab="S1DR");
+plot(ethanol$CONC, ethanol$S1DR, main="Ethanol", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
+plot(ethylene$CONC, ethylene$S1DR, main="Ethylene", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
+plot(ammonia$CONC, ammonia$S1DR, main="Ammonia", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
+plot(acetaldehyde$CONC, acetaldehyde$S1DR, main="Acetaldehyde", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
+plot(acetone$CONC, acetone$S1DR, main="Acetone", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
+plot(toluene$CONC, toluene$S1DR, main="Toluene", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
 
 #Plot DR vs concentration for batch 1
 plot(ethanol1$CONC, ethanol1$S1DR, main="Ethanol 1", xlab="Concentration",ylab="S1DR");
@@ -392,43 +392,80 @@ df.test <- df[-train.idx,];
 
 #Decision Tree
 library(rpart);
+require(ggplot2);
 library(rpart.plot);
 library(rattle);
 library(RColorBrewer);
 
-#Using rpart package
-df.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class");
-df.dt;
-printcp(df.dt);
-plotcp(df.dt);
-plot(df.dt, uniform=TRUE, main="Unpruned Analyte Classification Tree");
-text(df.dt, cex=.8);
+#Decision tree (entropy split) using rpart package
+entropy.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class",parms=list(split="information"));
+entropy.dt;
+printcp(entropy.dt);
+plotcp(entropy.dt);
+plot(entropy.dt, uniform=TRUE, main="Classification Tree (Entropy Split)");
+text(entropy.dt, cex=.8);
 #Find dimensions
-#par("usr");
-legend("bottomleft", c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.8);
-
-#prp(df.dt);
-#legend("bottomleft", c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.6);
-
-#fancyRpartPlot(df.dt);
-
+par("usr");
+legend(0.4,0.30, c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.8);
 # Prune the tree 
-df.pdt<- prune(df.dt, cp= df.dt$cptable[which.min(df.dt$cptable[,"xerror"]),"CP"]);
-plot(df.pdt, uniform=TRUE, main="Pruned Analyte Classification Tree");
-text(df.pdt, cex=.8);
+entropy.pdt<- prune(entropy.dt, cp= entropy.dt$cptable[which.min(entropy.dt$cptable[,"xerror"]),"CP"]);
+plot(entropy.pdt, uniform=TRUE, main="Pruned Classification Tree (Entropy Split)");
+text(entropy.pdt, cex=.8);
+legend(0.4,0.35, c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.8);
 
 #Predict
-df.pred = predict(df.pdt,df.test,type="class");
-
+entropy.pred = predict(entropy.pdt,df.test,type="class");
 #Find test error
-calculateTestError(df.pred,test.class);
+calculateTestError(entropy.pred,test.class);
+
+#Do 10 fold cross validation using entropy tree
+#split data into training and test (80% training and 20% test)
+cv.error.10= rep (0 ,10);
+for (i in 1:1) {
+  train.idx <-sample(nrow(df), floor(nrow(df)*0.8), replace=FALSE);
+  df.train <- df[train.idx, ];
+  df.test <- df[-train.idx,];
+  entropy.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class",parms=list(split="information"));
+  entropy.pred = predict(entropy.dt,df.test,type="class");
+  calculateTestError(entropy.pred,test.class);
+}
+cv.error.10;
+
+#Decision tree (gini split) using rpart package
+gini.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class",parms=list(split="gini"));
+gini.dt;
+printcp(gini.dt);
+plotcp(gini.dt);
+plot(gini.dt, uniform=TRUE, main="Classification Tree (Gini Split)");
+text(gini.dt, cex=.8);
+#Find dimensions
+par("usr");
+legend(0.4,0.35, c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.8);
+# Prune the tree 
+gini.pdt<- prune(gini.dt, cp= gini.dt$cptable[which.min(gini.dt$cptable[,"xerror"]),"CP"]);
+plot(gini.pdt, uniform=TRUE, main="Pruned Classification Tree (Gini Split)");
+text(gini.pdt, cex=.8);
+legend(0.4,0.35, c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.8);
+
+#Predict
+gini.pred = predict(gini.pdt,df.test,type="class");
+#Find test error
+calculateTestError(gini.pred,test.class);
+
+#Keep borders to a minimum
+par(mar=c(3,3,3,3));
+
+#Set outer margin
+par(oma=c(3,3,4,3));
 
 #Decision tree using tree library
 library(tree);
 tree.df = tree(GAS ~ . - GAS, data=df.train);
 summary(tree.df);
-plot(tree.df, main="Unpruned Analyte Classification Tree");
+plot(tree.df, main="Classification Tree");
+title(main="Classification Tree");
 text(tree.df, cex=.8);
+legend("bottomleft", c("1 Ethanol","2 Ethylene","3 Ammonia","4 Acetaldehyde","5 Acetone","6 Toluene"), cex=0.8);
 
 #Predict and compute error
 tree.df.pred = predict(tree.df,df.test,type="class");
@@ -437,7 +474,8 @@ calculateTestError(tree.df.pred,test.class);
 #Do cross validation
 cv.tree.df = cv.tree(tree.df,FUN=prune.misclass); 
 cv.tree.df;
-plot(cv.tree.df, main="Cross Validated Pruned Analyte Classification Tree");
+plot(cv.tree.df);
+title(main="Effect of Tree Size on Missclassification",xlab="sadf")
 text(cv.tree.df, cex=.8);
 
 #Plots
