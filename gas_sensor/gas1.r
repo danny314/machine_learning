@@ -96,300 +96,6 @@ calculateTestError <- function(predictedClass,trueClass) {
   return (1-sum(diag(tab))/sum(tab));
 }
 
-ethanol = subset(df,df$GAS == 1);
-ethylene = subset(df,df$GAS == 2);
-ammonia = subset(df,df$GAS == 3);
-acetaldehyde = subset(df,df$GAS == 4);
-acetone = subset(df,df$GAS == 5);
-toluene = subset(df,df$GAS == 6);
-
-ethanol1 = subset(ethanol, ethanol$BATCH == 1);
-ethylene1 = subset(ethylene, ethylene$BATCH == 1);
-ammonia1 = subset(ammonia, ammonia$BATCH == 1);
-acetaldehyde1 = subset(acetaldehyde, acetaldehyde$BATCH == 1);
-acetone1 = subset(acetone, acetone$BATCH == 1);
-toluene1 = subset(toluene, toluene$BATCH == 1);
-
-ethanol2 = subset(ethanol, ethanol$BATCH == 2);
-ethylene2 = subset(ethylene, ethylene$BATCH == 2);
-ammonia2 = subset(ammonia, ammonia$BATCH == 2);
-acetaldehyde2 = subset(acetaldehyde, acetaldehyde$BATCH == 2);
-acetone2 = subset(acetone, acetone$BATCH == 2);
-toluene2 = subset(toluene, toluene$BATCH == 2);
-
-ethanol3 = subset(ethanol, ethanol$BATCH == 3);
-ethylene3 = subset(ethylene, ethylene$BATCH == 3);
-ammonia3 = subset(ammonia, ammonia$BATCH == 3);
-acetaldehyde3 = subset(acetaldehyde, acetaldehyde$BATCH == 3);
-acetone3 = subset(acetone, acetone$BATCH == 3);
-# Batch 3 does not have any toluene
-#toluene3 = subset(toluene, toluene$BATCH == 3);
-
-ethanol4 = subset(ethanol, ethanol$BATCH == 4);
-ethylene4 = subset(ethylene, ethylene$BATCH == 4);
-ammonia4 = subset(ammonia, ammonia$BATCH == 4);
-acetaldehyde4 = subset(acetaldehyde, acetaldehyde$BATCH == 4);
-acetone4 = subset(acetone, acetone$BATCH == 4);
-toluene4 = subset(toluene, toluene$BATCH == 4);
-
-ethanol5 = subset(ethanol, ethanol$BATCH == 5);
-ethylene5 = subset(ethylene, ethylene$BATCH == 5);
-ammonia5 = subset(ammonia, ammonia$BATCH == 5);
-acetaldehyde5 = subset(acetaldehyde, acetaldehyde$BATCH == 5);
-acetone5 = subset(acetone, acetone$BATCH == 5);
-toluene5 = subset(toluene, toluene$BATCH == 5);
-
-ethanol6 = subset(ethanol, ethanol$BATCH == 6);
-ethylene6 = subset(ethylene, ethylene$BATCH == 6);
-ammonia6 = subset(ammonia, ammonia$BATCH == 6);
-acetaldehyde6 = subset(acetaldehyde, acetaldehyde$BATCH == 6);
-acetone6 = subset(acetone, acetone$BATCH == 6);
-toluene6 = subset(toluene, toluene$BATCH == 6);
-
-ethanol7 = subset(ethanol, ethanol$BATCH == 7);
-ethylene7 = subset(ethylene, ethylene$BATCH == 7);
-ammonia7 = subset(ammonia, ammonia$BATCH == 7);
-acetaldehyde7 = subset(acetaldehyde, acetaldehyde$BATCH == 7);
-acetone7 = subset(acetone, acetone$BATCH == 7);
-toluene7 = subset(toluene, toluene$BATCH == 7);
-
-ethanol8 = subset(ethanol, ethanol$BATCH == 8);
-ethylene8 = subset(ethylene, ethylene$BATCH == 8);
-ammonia8 = subset(ammonia, ammonia$BATCH == 8);
-acetaldehyde8 = subset(acetaldehyde, acetaldehyde$BATCH == 8);
-acetone8 = subset(acetone, acetone$BATCH == 8);
-toluene8 = subset(toluene, toluene$BATCH == 8);
-                  
-ethanol9 = subset(ethanol, ethanol$BATCH == 9);
-ethylene9 = subset(ethylene, ethylene$BATCH == 9);
-ammonia9 = subset(ammonia, ammonia$BATCH == 9);
-acetaldehyde9 = subset(acetaldehyde, acetaldehyde$BATCH == 9);
-acetone9 = subset(acetone, acetone$BATCH == 9);
-toluene9 = subset(toluene, toluene$BATCH == 9);
-
-ethanol10 = subset(ethanol, ethanol$BATCH == 10);
-ethylene10 = subset(ethylene, ethylene$BATCH == 10);
-ammonia10 = subset(ammonia, ammonia$BATCH == 10);
-acetaldehyde10 = subset(acetaldehyde, acetaldehyde$BATCH == 10);
-acetone10 = subset(acetone, acetone$BATCH == 10);
-toluene10 = subset(toluene, toluene$BATCH == 10);
-                  
-
-#Plot DR vs concentration for all batches
-plot(ethanol$CONC, ethanol$S1DR, main="Ethanol", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
-plot(ethylene$CONC, ethylene$S1DR, main="Ethylene", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
-plot(ammonia$CONC, ammonia$S1DR, main="Ammonia", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
-plot(acetaldehyde$CONC, acetaldehyde$S1DR, main="Acetaldehyde", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
-plot(acetone$CONC, acetone$S1DR, main="Acetone", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
-plot(toluene$CONC, toluene$S1DR, main="Toluene", xlab="Concentration (ppmv)",ylab="Direct Resistance (Sensor 1)");
-
-#Plot DR vs concentration for batch 1
-plot(ethanol1$CONC, ethanol1$S1DR, main="Ethanol 1", xlab="Concentration",ylab="S1DR");
-plot(ethylene1$CONC, ethylene1$S1DR);
-plot(ammonia1$CONC, ammonia1$S1DR);
-plot(acetaldehyde1$CONC, acetaldehyde1$S1DR);
-plot(acetone1$CONC, acetone1$S1DR);
-plot(toluene1$CONC, toluene1$S1DR);
-
-#Plot DR vs concentration for batch 2
-plot(ethanol2$CONC, ethanol2$S1DR, main="Ethanol 2", xlab="Concentration",ylab="S1DR");
-plot(ethylene2$CONC, ethylene2$S1DR);
-plot(ammonia2$CONC, ammonia2$S1DR);
-plot(acetaldehyde2$CONC, acetaldehyde2$S1DR);
-plot(acetone2$CONC, acetone2$S1DR);
-plot(toluene2$CONC, toluene2$S1DR);
-
-#Plot DR vs concentration for batch 3
-plot(ethanol3$CONC, ethanol3$S1DR, main="Ethanol 3", xlab="Concentration",ylab="S1DR");
-plot(ethylene3$CONC, ethylene3$S1DR);
-plot(ammonia3$CONC, ammonia3$S1DR);
-plot(acetaldehyde3$CONC, acetaldehyde3$S1DR);
-plot(acetone3$CONC, acetone3$S1DR);
-
-#Plot DR vs concentration for batch 4
-plot(ethanol4$CONC, ethanol4$S1DR, main="Ethanol 4", xlab="Concentration",ylab="S1DR");
-plot(ethylene4$CONC, ethylene4$S1DR);
-plot(ammonia4$CONC, ammonia4$S1DR);
-plot(acetaldehyde4$CONC, acetaldehyde4$S1DR);
-plot(acetone4$CONC, acetone4$S1DR);
-plot(toluene4$CONC, toluene4$S1DR);
-
-#Plot DR vs concentration for batch 5
-plot(ethanol5$CONC, ethanol5$S1DR, main="Ethanol 5", xlab="Concentration",ylab="S1DR");
-plot(ethylene5$CONC, ethylene5$S1DR);
-plot(ammonia5$CONC, ammonia5$S1DR);
-plot(acetaldehyde5$CONC, acetaldehyde5$S1DR);
-plot(acetone5$CONC, acetone5$S1DR);
-plot(toluene5$CONC, toluene5$S1DR);
-
-#Plot DR vs concentration for batch 6
-plot(ethanol6$CONC, ethanol6$S1DR, main="Ethanol 6", xlab="Concentration",ylab="S1DR");
-plot(ethylene6$CONC, ethylene6$S1DR);
-plot(ammonia6$CONC, ammonia6$S1DR);
-plot(acetaldehyde6$CONC, acetaldehyde6$S1DR);
-plot(acetone6$CONC, acetone6$S1DR);
-plot(toluene6$CONC, toluene6$S1DR);
-
-#Plot DR vs concentration for batch 7
-plot(ethanol7$CONC, ethanol7$S1DR, main="Ethanol 7", xlab="Concentration",ylab="S1DR");
-plot(ethylene7$CONC, ethylene7$S1DR);
-plot(ammonia7$CONC, ammonia7$S1DR);
-plot(acetaldehyde7$CONC, acetaldehyde7$S1DR);
-plot(acetone7$CONC, acetone7$S1DR);
-plot(toluene7$CONC, toluene7$S1DR);
-
-#Plot DR vs concentration for batch 8
-plot(ethanol8$CONC, ethanol8$S1DR, main="Ethanol 8", xlab="Concentration",ylab="S1DR");
-plot(ethylene8$CONC, ethylene8$S1DR);
-plot(ammonia8$CONC, ammonia8$S1DR);
-plot(acetaldehyde8$CONC, acetaldehyde8$S1DR);
-plot(acetone8$CONC, acetone8$S1DR);
-plot(toluene8$CONC, toluene8$S1DR);
-
-#Plot DR vs concentration for batch 9
-plot(ethanol9$CONC, ethanol9$S1DR, main="Ethanol 9", xlab="Concentration",ylab="S1DR");
-plot(ethylene9$CONC, ethylene9$S1DR);
-plot(ammonia9$CONC, ammonia9$S1DR);
-plot(acetaldehyde9$CONC, acetaldehyde9$S1DR);
-plot(acetone9$CONC, acetone9$S1DR);
-plot(toluene9$CONC, toluene9$S1DR);
-
-#Plot DR vs concentration for batch 10
-plot(ethanol10$CONC, ethanol10$S1DR, main="Ethanol 10", xlab="Concentration",ylab="S1DR");
-plot(ethylene10$CONC, ethylene10$S1DR);
-plot(ammonia10$CONC, ammonia10$S1DR);
-plot(acetaldehyde10$CONC, acetaldehyde10$S1DR);
-plot(acetone10$CONC, acetone10$S1DR);
-
-plot(toluene10$CONC, toluene10$S1DR, main="Toluene 10", xlab="Concentration",ylab="S1DR");
-plot(toluene10$CONC, toluene10$S2DR, main="Toluene 10", xlab="Concentration",ylab="S2DR");
-
-#Plot sum of DR from all sensors vs concentration for batch 10
-plot(ethanol10$CONC, ethanol10$S1DR + ethanol10$S2DR + ethanol10$S3DR + ethanol10$S4DR + ethanol10$S5DR 
-     + ethanol10$S6DR + ethanol10$S7DR + ethanol10$S8DR + ethanol10$S9DR + ethanol10$S10DR + ethanol10$S11DR
-     + ethanol10$S12DR + ethanol10$S13DR + ethanol10$S14DR + ethanol10$S15DR + ethanol10$S16DR,
-     ylab = "S1DR", xlab='Concentration');
-
-#Plot sum of DR from all sensors vs concentration for all batches
-plot(ethanol$CONC, ethanol$S1DR + ethanol$S2DR + ethanol$S3DR + ethanol$S4DR + ethanol$S5DR 
-     + ethanol$S6DR + ethanol$S7DR + ethanol$S8DR + ethanol$S9DR + ethanol$S10DR + ethanol$S11DR
-     + ethanol$S12DR + ethanol$S13DR + ethanol$S14DR + ethanol$S15DR + ethanol$S16DR,
-     ylab = "Sum of DR for All Sensors", xlab='Concentration');
-
-#Plot sum of NDR from all sensors vs concentration for all batches
-plot(ethanol$CONC, ethanol$S1NDR + ethanol$S2NDR + ethanol$S3NDR + ethanol$S4NDR + ethanol$S5NDR 
-     + ethanol$S6NDR + ethanol$S7NDR + ethanol$S8NDR + ethanol$S9NDR + ethanol$S10NDR + ethanol$S11NDR
-     + ethanol$S12NDR + ethanol$S13NDR + ethanol$S14NDR + ethanol$S15NDR + ethanol$S16NDR,
-     ylab = "NDR", xlab='Concentration');
-
-#PCA
-#ethanol
-pca <- prcomp(~ acetone$S1NDR + acetone$S1I_001 + acetone$CONC + acetone$S1I_01 + acetone$S1I_1 + 
-                acetone$S1D_001 + acetone$S1D_01 + acetone$S1D_1, data=acetone,scale=TRUE);
-
-ethanol.num <- subset(ethanol, select=-c(GAS,BATCH));
-ethanol.num.s1 <- subset(ethanol, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
-
-ethanol1.num.s1 <- subset(ethanol1, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
-
-pca <- princomp(~ ., data=ethanol1.num.s1,scale=TRUE, center=TRUE);
-pca <- princomp(~ ., data=ethanol.num,scale=TRUE, center=TRUE);
-
-pca.eth1.s1 <- prcomp(ethanol1.num.s1,scale=TRUE, center=TRUE);
-pca.eth <- prcomp(ethanol.num,scale=TRUE, center=TRUE);
-
-summary(pca.eth.s1);
-pca.eth.s1$rotation;
-plot(pca.eth.s1, main="PCA Ethanol Sensor 1");
-biplot(pca.eth.s1);
-
-summary(pca.eth);
-pca.eth$rotation;
-plot(pca.eth, main="PCA Ethanol");
-biplot(pca.eth);
-
-#ethylene
-ethylene.num.s1 <- subset(ethylene, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
-pca.ethy.s1 <- prcomp(ethylene.num.s1,scale=TRUE, center=TRUE);
-summary(pca.ethy.s1);
-pca.ethy.s1$rotation;
-plot(pca.ethy.s1, main="PCA Ethylene Sensor 1");
-biplot(pca.ethy.s1);
-
-#acetaldehyde
-acetaldehyde.num.s1 <- subset(acetaldehyde, select=c(S1DR, S1NDR, S1I_001, S1I_01, S1I_1, S1D_001, S1D_01, S1D_1, CONC));
-pca.acetaldehyde.s1 <- prcomp(acetaldehyde.num.s1,scale=TRUE, center=TRUE);
-summary(pca.acetaldehyde.s1);
-pca.acetaldehyde.s1$rotation;
-plot(pca.acetaldehyde.s1, main="PCA acetaldehyde Sensor 1");
-biplot(pca.acetaldehyde.s1);
-
-sink("/home/puneet/mr/output/output.txt"); 
-cor(ethanol1.num);
-sink();
-
-#Linear regression
-ethanol.num <- subset(ethanol, select=-c(GAS,BATCH));
-eth.lm <- lm(data=ethanol, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
-#eth1.lm <- lm(data=ethanol1.num, S1DR + S2DR + S3DR + S4DR + S5DR + S6DR + S7DR + S8DR + S9DR + S10DR + S11DR + S12DR + S13DR + S14DR + S15DR + S16DR ~.);
-summary(eth.lm);
-plot(eth.lm);
-
-ethanol1.num <- subset(ethanol1, select=-c(GAS,BATCH));
-eth1.lm <- lm(data=ethanol1, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
-summary(eth1.lm);
-
-ethanol2.num <- subset(ethanol2, select=-c(GAS,BATCH));
-eth2.lm <- lm(data=ethanol2, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC);
-eth2s2.lm <- lm(data=ethanol2, S2NDR ~ S2I_001 + S2I_01 + S2I_1 + S2D_001 + S2D_01 + S2D_1 + CONC);
-summary(eth2s2.lm);
-
-df.lm <- lm(data=df, S1NDR ~ S1I_001 + S1I_01 + S1I_1 + S1D_001 + S1D_01 + S1D_1 + CONC + GAS + BATCH);
-summary(df.lm);
-
-temp <- (subset(ethanol2, select=c(CONC,S1DR)));
-temp[with(temp,order(CONC,S1DR)),];
-
-plot(ethanol$CONC,ethanol$S1DR + ethanol$S2DR + ethanol$S3DR + ethanol$S4DR + ethanol$S5DR + ethanol$S6DR + ethanol$S7DR + ethanol$S8DR 
-     + ethanol$S9DR + ethanol$S10DR + ethanol$S11DR + ethanol$S12DR + ethanol$S13DR + ethanol$S14DR + ethanol$S15DR + ethanol$S16DR);
-
-plot(ethanol$CONC,ethanol$S1NDR + ethanol$S2NDR + ethanol$S3NDR + ethanol$S4NDR + ethanol$S5NDR + ethanol$S6NDR + ethanol$S7NDR + ethanol$S8NDR 
-     + ethanol$S9NDR + ethanol$S10NDR + ethanol$S11NDR + ethanol$S12NDR + ethanol$S13NDR + ethanol$S14NDR + ethanol$S15NDR + ethanol$S16NDR);
-
-#Handle outliers
-eth1.box <- boxplot(ethanol1$S1DR ~ ethanol1$CONC, data=ethanol1);
-eth1.clean <- subset(ethanol1, !S1DR %in% eth1.box$out);
-
-eth2.box <- boxplot(ethanol2$S1DR ~ ethanol2$CONC, data=ethanol2);
-eth2.clean <- subset(ethanol2, !S1DR %in% eth2.box$out);
-
-#See summary of DR of all 16 sensors
-ethanol.DR <- subset(ethanol, select=c(S1DR,S2DR,S3DR,S4DR,S5DR,S6DR,S7DR,S8DR,S9DR,S10DR,S11DR,S12DR,S13DR,S14DR,S15DR,S16DR));
-summary(ethanol.DR);
-
-#Sampling ethanol batch 1
-eth1.sample = sample(nrow(ethanol1),5);
-eth1.sample = ethanol1[eth1.sample,];
-eth1.sample = subset(eth1.sample,select = c(GAS,CONC, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
-eth1.sample[with(eth1.sample, order(CONC)), ]
-
-#Sampling ethanol batch 2
-eth2.sample = sample(nrow(ethanol2),5);
-eth2.sample = ethanol2[eth2.sample,];
-eth2.sample = subset(eth2.sample,select = c(GAS,CONC, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
-eth2.sample[with(eth2.sample, order(CONC)), ]
-
-#Sampling ethanol batch 10
-eth10.sample = sample(nrow(ethanol10),5);
-eth10.sample = ethanol10[eth10.sample,];
-eth10.sample = subset(eth10.sample,select = c(GAS,CONC, BATCH, S1DR, S2DR, S3DR, S4DR, S5DR, S6DR, S7DR, S8DR, S9DR, S10DR, S11DR, S12DR, S13DR, S14DR, S15DR, S16DR));
-eth10.sample[with(eth10.sample, order(CONC)),]
-
-#split data into training and test (80% training and 20% test)
-train.idx <-sample(nrow(df), floor(nrow(df)*0.8), replace=FALSE);
-df.train <- df[train.idx, ];
-df.test <- df[-train.idx,];
-
 #Decision Tree
 library(rpart);
 require(ggplot2);
@@ -420,16 +126,38 @@ calculateTestError(entropy.pred,test.class);
 
 #Do 10 fold cross validation using entropy tree
 #split data into training and test (80% training and 20% test)
-cv.error.10= rep (0 ,10);
-for (i in 1:1) {
+set.seed(6721);
+k = 10;
+enrtopy.cv.error.arr= rep (0,k);
+for (i in 1:k) {
   train.idx <-sample(nrow(df), floor(nrow(df)*0.8), replace=FALSE);
   df.train <- df[train.idx, ];
   df.test <- df[-train.idx,];
+  test.class <- df.test$GAS;
   entropy.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class",parms=list(split="information"));
   entropy.pred = predict(entropy.dt,df.test,type="class");
-  calculateTestError(entropy.pred,test.class);
+  enrtopy.cv.error.arr[i] = calculateTestError(entropy.pred,test.class);
 }
-cv.error.10;
+enrtopy.cv.error.arr;
+enrtopy.cv.error = mean(enrtopy.cv.error.arr);
+enrtopy.cv.error;
+
+#Do cross validation using gini split
+set.seed(7412);
+k = 10;
+gini.cv.error.arr = rep (0,k);
+for (i in 1:k) {
+  train.idx <-sample(nrow(df), floor(nrow(df)*0.8), replace=FALSE);
+  df.train <- df[train.idx, ];
+  df.test <- df[-train.idx,];
+  test.class <- df.test$GAS;
+  gini.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class",parms=list(split="gini"));
+  gini.pred = predict(gini.dt,df.test,type="class");
+  gini.cv.error.arr[i] = calculateTestError(gini.pred,test.class);
+}
+gini.cv.error.arr;
+gini.cv.error = mean(gini.cv.error.arr);
+gini.cv.error;
 
 #Decision tree (gini split) using rpart package
 gini.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class",parms=list(split="gini"));
