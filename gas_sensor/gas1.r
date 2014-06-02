@@ -217,12 +217,21 @@ prune.tree.df = prune.misclass(tree.df,best=20);
 prune.tree.df.pred = predict(prune.tree.df,df.test,type="class");
 calculateTestError(prune.tree.df.pred,test.class);
 
-#Bagged trees
+#Bagged trees on taining set
 library(randomForest);
 bag.df = randomForest(GAS ~ . - GAS, data=df.train, mtry = 130, importance=TRUE);
 bag.df.pred = predict(bag.df,df.test,type="class");
 calculateTestError(bag.df.pred,test.class);
 plot(bag.df);
+
+#Bagged trees on full set
+library(randomForest);
+bag.df.full = randomForest(GAS ~ . - GAS, data=df, mtry = 130, importance=TRUE);
+bag.df.full;
+plot(bag.df.full, main=NULL, log="y");
+legend("topright", colnames(bag.df.full$err.rate),col=1:7,cex=0.8,fill=1:7);
+#legend("topright", c('OOB','Ethanol','Ethylene','Ammonia','Acetaldehyde','Acetone','Toluene'),col=1:7,cex=0.8,fill=1:7);
+varImpPlot(bag.df.full, main=NULL);
 
 #Random forest
 library(randomForest);
