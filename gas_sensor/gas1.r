@@ -239,8 +239,10 @@ library(randomForest);
 forest.df = randomForest(GAS ~ . - GAS, data=df.train, mtry = 12, importance=TRUE);
 forest.df.pred = predict(forest.df,df.test,type="class");
 calculateTestError(forest.df.pred,test.class);
-plot(forest.df);
+plot(forest.df,main=NULL, log="y");
+legend("topright", c('OOB','Ethanol','Ethylene','Ammonia','Acetaldehyde','Acetone','Toluene'),col=1:6,cex=0.8,fill=1:6);
 forest.df;
+table(forest.df.pred,test.class,dnn=c("Predicted Class","Observed Class"));
 
 #Boosting using gbm (does not work)
 library(gbm);
