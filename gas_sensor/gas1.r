@@ -229,7 +229,8 @@ library(randomForest);
 bag.df.full = randomForest(GAS ~ . - GAS, data=df, mtry = 130, importance=TRUE);
 bag.df.full;
 plot(bag.df.full, main=NULL, log="y");
-legend("topright", colnames(bag.df.full$err.rate),col=1:7,cex=0.8,fill=1:7);
+legend("topright", c('OOB','Ethanol','Ethylene','Ammonia','Acetaldehyde','Acetone','Toluene'),col=1:6,cex=0.8,fill=1:6);
+legend("topright", colnames(bag.df.full$err.rate),col=1:7);
 #legend("topright", c('OOB','Ethanol','Ethylene','Ammonia','Acetaldehyde','Acetone','Toluene'),col=1:7,cex=0.8,fill=1:7);
 varImpPlot(bag.df.full, main=NULL);
 
@@ -267,6 +268,6 @@ evol.test = errorevol(adaboost.df,newdata=df.test);
 
 
 #comparing error evolution in training and test set
-plot(evol.test$error, type="l",main="AdaBoost error Vs number of trees", xlab="Iterations", ylab="Error", col = "red") 
+plot(evol.test$error, type="l", xlab="Iterations", ylab="Error", col = "red") 
 lines(evol.train$error, cex = .5 ,col="blue", lty=2);
 legend("topright", c("Test","Train"), col = c("red", "blue"), lty=1:2);
