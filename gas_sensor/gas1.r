@@ -300,3 +300,16 @@ plot(forest.perf.3, add=TRUE, colorize = TRUE);
 plot(forest.perf.4, add=TRUE, colorize = TRUE);
 plot(forest.perf.5, add=TRUE, colorize = TRUE);
 plot(forest.perf.6, add=TRUE, colorize = TRUE);
+
+#Combine all classes to generate single ROC
+forest.all.prob.pred = c(forest.df.prob.pred[,1],forest.df.prob.pred[,2],forest.df.prob.pred[,3],
+                         forest.df.prob.pred[,4],forest.df.prob.pred[,5],forest.df.prob.pred[,6]);
+
+test.class.all = c(ifelse(test.class == 1, 1, 0),ifelse(test.class == 2, 1, 0),ifelse(test.class == 3, 1, 0)
+                  ,ifelse(test.class == 4, 1, 0),ifelse(test.class == 5, 1, 0),ifelse(test.class == 6, 1, 0));
+
+forest.prediction.all = prediction(forest.all.prob.pred, test.class.all);
+forest.perf.all = performance(forest.prediction.all, 'tpr', 'fpr');
+plot(forest.perf.all);
+forest.all.auroc <- attr(performance(forest.prediction.all, "auc"),"y.values")[[1]];
+forest.all.auroc;
