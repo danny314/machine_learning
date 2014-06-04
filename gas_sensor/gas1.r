@@ -310,7 +310,7 @@ test.class.all = c(ifelse(test.class == 1, 1, 0),ifelse(test.class == 2, 1, 0),i
 
 forest.prediction.all = prediction(forest.all.prob.pred, test.class.all);
 forest.perf.all = performance(forest.prediction.all, 'tpr', 'fpr');
-plot(forest.perf.all);
+plot(forest.perf.all,add=TRUE);
 forest.all.auroc <- attr(performance(forest.prediction.all, "auc"),"y.values")[[1]];
 forest.all.auroc;
 
@@ -327,3 +327,23 @@ entropy.perf.all = performance(entropy.prediction.all, 'tpr', 'fpr');
 plot(entropy.perf.all);
 entropy.all.auroc <- attr(performance(entropy.prediction.all, "auc"),"y.values")[[1]];
 entropy.all.auroc;
+
+#ROC for all classes for gini tree
+gini.df.prob.pred = predict(gini.dt,df.test,type="prob");
+gini.all.prob.pred = c(gini.df.prob.pred[,1],gini.df.prob.pred[,2],gini.df.prob.pred[,3],
+                       gini.df.prob.pred[,4],gini.df.prob.pred[,5],gini.df.prob.pred[,6]);
+
+test.class.all = c(ifelse(test.class == 1, 1, 0),ifelse(test.class == 2, 1, 0),ifelse(test.class == 3, 1, 0)
+                   ,ifelse(test.class == 4, 1, 0),ifelse(test.class == 5, 1, 0),ifelse(test.class == 6, 1, 0));
+
+gini.prediction.all = prediction(gini.all.prob.pred, test.class.all);
+gini.perf.all = performance(gini.prediction.all, 'tpr', 'fpr');
+plot(gini.perf.all);
+gini.all.auroc <- attr(performance(gini.prediction.all, "auc"),"y.values")[[1]];
+gini.all.auroc;
+
+#Plot all ROC on one chart
+plot(entropy.perf.all,col="red",lwd=2);
+plot(gini.perf.all,add=TRUE,col="green",lwd=2);
+plot(forest.perf.all,add=TRUE,col="blue",lwd=2);
+legend("bottomright", c("Entropy","Gini","RF"), col = c("red","green","blue"), lty=1:2);
