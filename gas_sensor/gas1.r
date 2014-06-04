@@ -282,5 +282,21 @@ library(ROCR);
 # Get the probability of predicted classes
 forest.df.prob.pred = predict(forest.df,df.test,type="prob");
 # For ethanol only
-forest.prediction = prediction(forest.df.prob.pred[,1], ifelse(test.class == 1, 1, 0));
-plot(performance(forest.prediction, 'tpr', 'fpr'));
+forest.prediction.1 = prediction(forest.df.prob.pred[,1], ifelse(test.class == 1, 1, 0));
+forest.prediction.2 = prediction(forest.df.prob.pred[,2], ifelse(test.class == 2, 1, 0));
+forest.prediction.3 = prediction(forest.df.prob.pred[,3], ifelse(test.class == 3, 1, 0));
+forest.prediction.4 = prediction(forest.df.prob.pred[,4], ifelse(test.class == 4, 1, 0));
+forest.prediction.5 = prediction(forest.df.prob.pred[,5], ifelse(test.class == 5, 1, 0));
+forest.prediction.6 = prediction(forest.df.prob.pred[,6], ifelse(test.class == 6, 1, 0));
+forest.perf.1 = performance(forest.prediction.1, 'tpr', 'fpr');
+forest.perf.2 = performance(forest.prediction.2, 'tpr', 'fpr');
+forest.perf.3 = performance(forest.prediction.3, 'tpr', 'fpr');
+forest.perf.4 = performance(forest.prediction.4, 'tpr', 'fpr');
+forest.perf.5 = performance(forest.prediction.5, 'tpr', 'fpr');
+forest.perf.6 = performance(forest.prediction.6, 'tpr', 'fpr');
+plot(forest.perf.1, colorize = TRUE);
+plot(forest.perf.2, add=TRUE, colorize = TRUE);
+plot(forest.perf.3, add=TRUE, colorize = TRUE);
+plot(forest.perf.4, add=TRUE, colorize = TRUE);
+plot(forest.perf.5, add=TRUE, colorize = TRUE);
+plot(forest.perf.6, add=TRUE, colorize = TRUE);
