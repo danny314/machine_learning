@@ -3,6 +3,7 @@ options("width"=200);
 #Import preprocessed gas sensor array drift data set using space as the separator
 gasdata = read.table(paste(Sys.getenv("HOME"),"/mr/preprocess/allbatches.dat",sep=""),header=F);
 
+# Give appropriate names to features
 df = transform(gasdata,GAS=as.factor(gasdata$V1), CONC=gasdata$V2,
        #sensor 1               
        S1DR = gasdata$V3, S1NDR = gasdata$V4, S1I_001 = gasdata$V5, S1I_01 = gasdata$V6, 
@@ -91,6 +92,7 @@ df = subset(df, select = -c(V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,
 
 gasdata <- NULL;
 
+#Function to calculate classification error.
 calculateTestError <- function(predictedClass,trueClass) {
   tab <- table(predictedClass,trueClass);
   return (1-sum(diag(tab))/sum(tab));
