@@ -275,3 +275,12 @@ evol.test = errorevol(adaboost.df,newdata=df.test);
 plot(evol.test$error, type="l", xlab="Iterations", ylab="Error", col = "red") 
 lines(evol.train$error, cex = .5 ,col="blue", lty=2);
 legend("topright", c("Test","Train"), col = c("red", "blue"), lty=1:2);
+
+
+#Generate ROC curve
+library(ROCR);
+# Get the probability of predicted classes
+forest.df.prob.pred = predict(forest.df,df.test,type="prob");
+# For ethanol only
+forest.prediction = prediction(forest.df.prob.pred[,1], ifelse(test.class == 1, 1, 0));
+plot(performance(forest.prediction, 'tpr', 'fpr'));
