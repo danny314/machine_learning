@@ -342,8 +342,23 @@ plot(gini.perf.all);
 gini.all.auroc <- attr(performance(gini.prediction.all, "auc"),"y.values")[[1]];
 gini.all.auroc;
 
+#ROC for all classes for bagged tree
+bag.df.prob.pred = predict(bag.df.full,df,type="prob");
+bag.all.prob.pred = c(bag.df.prob.pred[,1],bag.df.prob.pred[,2],bag.df.prob.pred[,3],
+                      bag.df.prob.pred[,4],bag.df.prob.pred[,5],bag.df.prob.pred[,6]);
+
+test.class.all = c(ifelse(df$GAS == 1, 1, 0),ifelse(df$GAS == 2, 1, 0),ifelse(df$GAS == 3, 1, 0)
+                   ,ifelse(df$GAS == 4, 1, 0),ifelse(df$GAS == 5, 1, 0),ifelse(df$GAS == 6, 1, 0));
+
+bag.prediction.all = prediction(bag.all.prob.pred, test.class.all);
+bag.perf.all = performance(bag.prediction.all, 'tpr', 'fpr');
+plot(bag.perf.all);
+bag.all.auroc <- attr(performance(bag.prediction.all, "auc"),"y.values")[[1]];
+bag.all.auroc;
+
 #Plot all ROC on one chart
 plot(entropy.perf.all,col="red",lwd=2);
 plot(gini.perf.all,add=TRUE,col="green",lwd=2);
+plot(bag.perf.all,add=TRUE,col="orange",lwd=2);
 plot(forest.perf.all,add=TRUE,col="blue",lwd=2);
-legend("bottomright", c("Entropy","Gini","RF"), col = c("red","green","blue"), lty=1:2);
+legend("bottomright", c("Entropy","Gini","Bag","RF"), col = c("red","green","orange","blue"), lty=1:2);
