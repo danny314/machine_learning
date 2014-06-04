@@ -277,7 +277,7 @@ lines(evol.train$error, cex = .5 ,col="blue", lty=2);
 legend("topright", c("Test","Train"), col = c("red", "blue"), lty=1:2);
 
 
-#Generate ROC curve
+#Generate individual ROC curve for random forest
 library(ROCR);
 # Get the probability of predicted classes
 forest.df.prob.pred = predict(forest.df,df.test,type="prob");
@@ -301,7 +301,7 @@ plot(forest.perf.4, add=TRUE, colorize = TRUE);
 plot(forest.perf.5, add=TRUE, colorize = TRUE);
 plot(forest.perf.6, add=TRUE, colorize = TRUE);
 
-#Combine all classes to generate single ROC
+#Combine all classes to generate single ROC for random forest
 forest.all.prob.pred = c(forest.df.prob.pred[,1],forest.df.prob.pred[,2],forest.df.prob.pred[,3],
                          forest.df.prob.pred[,4],forest.df.prob.pred[,5],forest.df.prob.pred[,6]);
 
@@ -313,3 +313,17 @@ forest.perf.all = performance(forest.prediction.all, 'tpr', 'fpr');
 plot(forest.perf.all);
 forest.all.auroc <- attr(performance(forest.prediction.all, "auc"),"y.values")[[1]];
 forest.all.auroc;
+
+#ROC for all classes for entropy tree
+entropy.df.prob.pred = predict(entropy.dt,df.test,type="prob");
+entropy.all.prob.pred = c(entropy.df.prob.pred[,1],entropy.df.prob.pred[,2],entropy.df.prob.pred[,3],
+                          entropy.df.prob.pred[,4],entropy.df.prob.pred[,5],entropy.df.prob.pred[,6]);
+
+test.class.all = c(ifelse(test.class == 1, 1, 0),ifelse(test.class == 2, 1, 0),ifelse(test.class == 3, 1, 0)
+                   ,ifelse(test.class == 4, 1, 0),ifelse(test.class == 5, 1, 0),ifelse(test.class == 6, 1, 0));
+
+entropy.prediction.all = prediction(entropy.all.prob.pred, test.class.all);
+entropy.perf.all = performance(entropy.prediction.all, 'tpr', 'fpr');
+plot(entropy.perf.all);
+entropy.all.auroc <- attr(performance(entropy.prediction.all, "auc"),"y.values")[[1]];
+entropy.all.auroc;
