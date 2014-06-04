@@ -356,9 +356,27 @@ plot(bag.perf.all);
 bag.all.auroc <- attr(performance(bag.prediction.all, "auc"),"y.values")[[1]];
 bag.all.auroc;
 
+#ROC for all classes for boosted tree
+adaboost.df.prob.pred = predict(adaboost.df,df.test,type="prob");
+adaboost.all.prob.pred = c(adaboost.df.prob.pred$prob[,1],adaboost.df.prob.pred$prob[,2],
+                      adaboost.df.prob.pred$prob[,3],adaboost.df.prob.pred$prob[,4],
+                      adaboost.df.prob.pred$prob[,5],adaboost.df.prob.pred$prob[,6]);
+
+test.class.all = c(ifelse(test.class == 1, 1, 0),ifelse(test.class == 2, 1, 0),ifelse(test.class == 3, 1, 0)
+                   ,ifelse(test.class == 4, 1, 0),ifelse(test.class == 5, 1, 0),ifelse(test.class == 6, 1, 0));
+
+adaboost.prediction.all = prediction(adaboost.all.prob.pred, test.class.all);
+adaboost.perf.all = performance(adaboost.prediction.all, 'tpr', 'fpr');
+plot(adaboost.perf.all);
+adaboost.all.auroc <- attr(performance(adaboost.prediction.all, "auc"),"y.values")[[1]];
+adaboost.all.auroc;
+
+
 #Plot all ROC on one chart
 plot(entropy.perf.all,col="red",lwd=2);
 plot(gini.perf.all,add=TRUE,col="green",lwd=2);
 plot(bag.perf.all,add=TRUE,col="orange",lwd=2);
+plot(adaboost.perf.all,add=TRUE,col="brown",lwd=2);
 plot(forest.perf.all,add=TRUE,col="blue",lwd=2);
-legend("bottomright", c("Entropy","Gini","Bag","RF"), col = c("red","green","orange","blue"), lty=1:2);
+legend("bottomright", c("Entropy","Gini","Bag","Adaboost","RF"), 
+       col = c("red","green","orange","brown","blue"), lty=1:2);
