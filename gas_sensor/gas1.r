@@ -143,6 +143,8 @@ for (i in 1:k) {
 enrtopy.cv.error.arr;
 enrtopy.cv.error = mean(enrtopy.cv.error.arr);
 enrtopy.cv.error;
+table(entropy.pred,test.class,dnn=c("Predicted Class","Observed Class"));
+
 
 #Do cross validation using gini split
 set.seed(7412);
@@ -160,6 +162,7 @@ for (i in 1:k) {
 gini.cv.error.arr;
 gini.cv.error = mean(gini.cv.error.arr);
 gini.cv.error;
+table(gini.pred,test.class,dnn=c("Predicted Class","Observed Class"));
 
 #Decision tree (gini split) using rpart package
 gini.dt <- rpart(GAS ~ . - GAS, data=df.train, method="class",parms=list(split="gini"));
@@ -342,7 +345,21 @@ plot(gini.perf.all);
 gini.all.auroc <- attr(performance(gini.prediction.all, "auc"),"y.values")[[1]];
 gini.all.auroc;
 
-#ROC for all classes for bagged tree
+#ROC for all classes for bagged tree using split data set
+bag.df.test.prob.pred = predict(bag.df,df.test,type="prob");
+bag.test.prob.pred = c(bag.df.test.prob.pred[,1],bag.df.test.prob.pred[,2],bag.df.test.prob.pred[,3],
+                       bag.df.test.prob.pred[,4],bag.df.test.prob.pred[,5],bag.df.test.prob.pred[,6]);
+
+test.class.all = c(ifelse(test.class == 1, 1, 0),ifelse(test.class == 2, 1, 0),ifelse(test.class == 3, 1, 0)
+                   ,ifelse(test.class == 4, 1, 0),ifelse(test.class == 5, 1, 0),ifelse(test.class == 6, 1, 0));
+
+bag.test.prediction.all = prediction(bag.test.prob.pred, test.class.all);
+bag.test.perf.all = performance(bag.test.prediction.all, 'tpr', 'fpr');
+plot(bag.test.perf.all);
+bag.test.all.auroc <- attr(performance(bag.test.prediction.all, "auc"),"y.values")[[1]];
+bag.test.all.auroc;
+
+#ROC for all classes for bagged tree using full data set
 bag.df.prob.pred = predict(bag.df.full,df,type="prob");
 bag.all.prob.pred = c(bag.df.prob.pred[,1],bag.df.prob.pred[,2],bag.df.prob.pred[,3],
                       bag.df.prob.pred[,4],bag.df.prob.pred[,5],bag.df.prob.pred[,6]);
