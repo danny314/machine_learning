@@ -1,2 +1,2 @@
-Various machine learning and data mining algorithms.
+Various machine learning and data mining projects.
 
