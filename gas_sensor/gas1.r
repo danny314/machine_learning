@@ -1,6 +1,7 @@
 options("width"=200);
 
-#Import preprocessed gas sensor array drift data set using space as the separator
+#Import preprocessed gas sensor array drift data set using space as the separator.
+#All the batches have been combined into one file.
 gasdata = read.table(paste(Sys.getenv("HOME"),"/mr/preprocess/allbatches.dat",sep=""),header=F);
 
 # Give appropriate names to features
