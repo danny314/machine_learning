@@ -227,7 +227,13 @@ library(randomForest);
 bag.df = randomForest(GAS ~ . - GAS, data=df.train, mtry = 130, importance=TRUE);
 bag.df.pred = predict(bag.df,df.test,type="class");
 calculateTestError(bag.df.pred,test.class);
-plot(bag.df);
+bag.df;
+plot(bag.df, main=NULL, log="y");
+legend("topright", c('OOB','Ethanol','Ethylene','Ammonia','Acetaldehyde','Acetone','Toluene'),col=1:6,cex=0.8,fill=1:6);
+legend("topright", colnames(bag.df$err.rate),col=1:7);
+#legend("topright", c('OOB','Ethanol','Ethylene','Ammonia','Acetaldehyde','Acetone','Toluene'),col=1:7,cex=0.8,fill=1:7);
+varImpPlot(bag.df, main=NULL);
+
 
 #Bagged trees on full set
 library(randomForest);
