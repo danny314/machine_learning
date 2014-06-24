@@ -1,0 +1,1 @@
+This folder contains linear regression on two data sets - Boston housing and hospital patient data. Boston housing is a simple demonstration of linear regression whereas hospital model is much more thorough model using Lasso and Ridge regression. The model predicts the length of stay and expenses for a patient based on 128 variables with reasonable accuracy.
