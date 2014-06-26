@@ -1,0 +1,1 @@
+This is a Java project that preprocesses gas sensor data before it is given to R for analysis. Preprocessing involves combining ten individual batches into one with addition of a batch column. Preprocessing also removes the feature number prefix from all the features and separates out gas class and concentration which are provided as one concatenated feature.
